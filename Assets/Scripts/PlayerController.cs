@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     private int jumpBufferCounter; 
     private int bufferMax = 10;         // max number of frames to allow before executing jump
     private float coyoteTimer;
-    private float coyoteMaxTime = 0.5f; // in seconds
+    [SerializeField] private float coyoteMaxTime = 0.5f; // in seconds
     private bool wasGrounded;           // for coyote time
     private bool timerStart;
 
