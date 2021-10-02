@@ -13,8 +13,11 @@ public class PlayerController : MonoBehaviour
 
     private float dirX = 0f;
     private float speed = 0f;
+    public static bool IsRolling = false;
+    private float rollDir;
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float jumpForce = 14f;
+    [SerializeField] private float rollDistance = 20f;
 
     private enum MovementState { idle, running, jumping, falling }
     [SerializeField] private AudioSource jumpSoundEffect;
@@ -53,7 +56,20 @@ public class PlayerController : MonoBehaviour
         if(Globals.debuffs.Contains(Globals.DebuffState.slow))
             speed /= 2;
 
-        rb.velocity = new Vector2(dirX * speed, rb.velocity.y);
+        if (Input.GetKeyDown("f") && IsGrounded())
+        {
+            rollDir = dirX;
+            anim.SetTrigger("roll");
+        }
+
+        if (IsRolling)
+        {
+            rb.velocity = new Vector2(rollDir * rollDistance, rb.velocity.y);
+        }
+        else
+        {
+            rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
+        }
 
         if (Input.GetButton("Jump"))
         {
@@ -111,12 +127,12 @@ public class PlayerController : MonoBehaviour
         if (dirX > 0f)
         {
             state = MovementState.running;
-            //sprite.flipX = false;
+            sprite.flipX = false;
         }
         else if (dirX < 0f)
         {
             state = MovementState.running;
-            //sprite.flipX = true;
+            sprite.flipX = true;
         }
         else
         {
