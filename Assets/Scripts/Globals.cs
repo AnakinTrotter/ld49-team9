@@ -8,9 +8,12 @@ public static class Globals {
     public static int lives = 1;
     public static int babyRage = 0;
     public static bool shouldSpawn = true;
-    public static bool gameOver = false;
 
     // keep track of player debuffs
     public enum DebuffState { invert, slow } 
     public static HashSet<DebuffState> debuffs = new HashSet<DebuffState>();
+
+    public static void gameOver() {
+        Debug.Log("DEAD");
+    }
 }

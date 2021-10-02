@@ -18,6 +18,9 @@ public class Baby : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Globals.babyRage > 10) {
+            Globals.gameOver();
+        }
         BabyState state = timeLeft > 5 ? BabyState.crying : BabyState.idle;
         if(timeLeft > 0) {
             timeLeft -= Time.deltaTime;
@@ -25,6 +28,9 @@ public class Baby : MonoBehaviour
             Cry();
             float newTime = cryInterval - Globals.level;
             timeLeft = newTime >= 5 ? newTime : 5;
+            if(Globals.babyRage >= 9) {
+                timeLeft = 5;
+            }
         }
         anim.SetInteger("state", (int)state);
     }
