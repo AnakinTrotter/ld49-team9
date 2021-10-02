@@ -32,6 +32,7 @@ public class Baby : MonoBehaviour
     void Cry()
     {
         Globals.debuffs.Clear();
+        Globals.babyRage++;
         // possible stuff to do:
         // give the player a debuff until the next tantrum
         // trigger a change in the house
@@ -40,7 +41,10 @@ public class Baby : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
         if(col.gameObject.name.Equals("Player")) {
-            int temp = Globals.pacifiers;
+            Globals.babyRage -= Globals.pacifiers;
+            if(Globals.babyRage < 0) {
+                Globals.babyRage = 0;
+            }
             Globals.pacifiers = 0;
             
             // do something
