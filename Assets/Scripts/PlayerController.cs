@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
         coll = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        // Globals.debuffs.Add(Globals.DebuffState.invert);
+        Globals.debuffs.Add(Globals.DebuffState.invert);
         // Globals.debuffs.Add(Globals.DebuffState.slow);
         jumpBufferCounter = 100;
         coyoteTimer = 0f;
