@@ -19,8 +19,12 @@ public class PlayerController : MonoBehaviour
     private enum MovementState { idle, running, jumping, falling }
     [SerializeField] private AudioSource jumpSoundEffect;
 
-    private int jumpBufferCounter = 100; 
+    private int jumpBufferCounter; 
     private int bufferMax = 10;         // max number of frames to allow before executing jump
+    private float coyoteTimer;
+    private float coyoteMaxTime = 0.5f; // in seconds
+    private bool wasGrounded;           // for coyote time
+    private bool timerStart;
 
     // Start is called before the first frame update
     private void Start()
@@ -31,6 +35,10 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         // Globals.debuffs.Add(Globals.DebuffState.invert);
         // Globals.debuffs.Add(Globals.DebuffState.slow);
+        jumpBufferCounter = 100;
+        coyoteTimer = 0f;
+        wasGrounded = false;
+        timerStart = false;
     }
 
     // Update is called once per frame
@@ -51,6 +59,37 @@ public class PlayerController : MonoBehaviour
         {
             jumpBufferCounter = 0;
         }
+        
+        // START Coyote Time logic
+        if (IsGrounded() && rb.velocity.y == 0)  // to make sure player is not in process of jumping
+        {
+            wasGrounded = true;
+        }
+        else
+        {
+            if (wasGrounded)                     // if just left edge, start timer
+            {
+                timerStart = true;
+                wasGrounded = false;
+            }
+        }
+        if (coyoteTimer < coyoteMaxTime && timerStart)         // while coyote time   
+        {
+            if (Input.GetButton("Jump"))
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                timerStart = false;
+                coyoteTimer = 0;
+            }
+            else
+                coyoteTimer += Time.deltaTime;
+        }
+        else
+        {
+            timerStart = false;
+            coyoteTimer = 0;
+        }
+        // END Coyote Time logic
 
         if (jumpBufferCounter < bufferMax)
         {
@@ -61,6 +100,7 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             }
         }
+        
         UpdateAnimationState();
     }
 
