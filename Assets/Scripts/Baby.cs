@@ -6,15 +6,19 @@ public class Baby : MonoBehaviour
 {
     public float cryInterval = 10f;
     private float timeLeft;
+    private enum BabyState { idle, crying }
+    private Animator anim;
     // Start is called before the first frame update
     void Start()
     {
-        timeLeft = cryInterval;
+        timeLeft = 5;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        BabyState state = timeLeft > 5 ? BabyState.crying : BabyState.idle;
         if(timeLeft > 0) {
             timeLeft -= Time.deltaTime;
         } else {
@@ -22,6 +26,7 @@ public class Baby : MonoBehaviour
             float newTime = cryInterval - Globals.level;
             timeLeft = newTime >= 5 ? newTime : 5;
         }
+        anim.SetInteger("state", (int)state);
     }
 
     void Cry()
