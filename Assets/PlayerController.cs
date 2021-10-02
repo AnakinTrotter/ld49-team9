@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private AudioSource jumpSoundEffect;
 
+    private int jumpBufferCounter = 0; 
+    private int bufferMax = 10;         // max number of frames to allow before executing jump
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -34,12 +37,20 @@ public class PlayerController : MonoBehaviour
         dirX = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
 
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if (Input.GetButton("Jump"))
         {
-            // jumpSoundEffect.Play();
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            jumpBufferCounter = 0;
         }
 
+        if (jumpBufferCounter < bufferMax)
+        {
+            jumpBufferCounter += 1;
+            if (IsGrounded())
+            {
+                // jumpSoundEffect.Play();
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            }
+        }
         UpdateAnimationState();
     }
 
