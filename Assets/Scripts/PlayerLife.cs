@@ -1,28 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class PlayerLife : MonoBehaviour
+public static class PlayerLife
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    private void TakeDamage(int x){
-        Globals.lives -= x;
+    public static void TakeDamage(){
+        Globals.lives--;
         if(Globals.lives <= 0){
             Die();
         }
     }
-    private void Die(){
 
-    }
-    private void RestartLevel(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    public static void TakeDamage(int x){
+        Globals.lives -= x;
+        Debug.Log("HP: " + Globals.lives);
+        if(Globals.lives <= 0){
+            Die();
+        }
     }
 
+    public static void Die(){
+        Globals.gameOver();
+    }
 }
 

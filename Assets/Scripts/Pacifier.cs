@@ -20,7 +20,7 @@ public class Pacifier : MonoBehaviour
     {
         if(col.gameObject.name.Equals("Player")) {
             Globals.pacifiers++;
-            Destroy(transform.root.gameObject);
+            Destroy(gameObject);
             // Debug.Log(Globals.pacifiers);
         }
     }

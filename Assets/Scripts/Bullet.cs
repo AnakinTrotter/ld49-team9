@@ -18,6 +18,12 @@ public class Bullet : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        PlayerLife.TakeDamage();
+        Destroy(gameObject);
+    }
+
     public Rigidbody2D getRB()
     {
         return rb;
