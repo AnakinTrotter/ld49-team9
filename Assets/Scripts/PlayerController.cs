@@ -12,11 +12,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask jumpableGround;
 
     private float dirX = 0f;
+    private float speed = 0f;
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float jumpForce = 14f;
 
     private enum MovementState { idle, running, jumping, falling }
-
     [SerializeField] private AudioSource jumpSoundEffect;
 
     private int jumpBufferCounter = 100; 
@@ -29,13 +29,23 @@ public class PlayerController : MonoBehaviour
         coll = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        Globals.debuffs.Add(Globals.DebuffState.invert);
+        Globals.debuffs.Add(Globals.DebuffState.slow);
     }
 
     // Update is called once per frame
     private void Update()
     {
         dirX = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
+        speed = moveSpeed;
+
+        // account for debuffs
+        if(Globals.debuffs.Contains(Globals.DebuffState.invert))
+            dirX *= -1;
+        if(Globals.debuffs.Contains(Globals.DebuffState.slow))
+            speed /= 2;
+
+        rb.velocity = new Vector2(dirX * speed, rb.velocity.y);
 
         if (Input.GetButton("Jump"))
         {
