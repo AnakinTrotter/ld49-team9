@@ -294,7 +294,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1155287749}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f31411c0c3572459eca944b166cf14, type: 3}
+  m_Script: {fileID: 11500000, guid: 0faae461b8d0b1a41a40785a0d67516d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   jumpableGround:
