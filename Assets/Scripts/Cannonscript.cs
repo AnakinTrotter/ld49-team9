@@ -7,6 +7,8 @@ public class Cannonscript : MonoBehaviour
     public Transform player;
     public Transform baby;
     public Transform firepoint;
+    public Transform firepoint2;
+    public Transform cannon;
     public GameObject bullet;
     float timebetween;
     public float starttimebetween;
@@ -21,7 +23,15 @@ public class Cannonscript : MonoBehaviour
     {
         if(player.position.x <= baby.position.x + 3 && player.position.x >= baby.position.x -3 ){
             if(timebetween <= 0){
-                Instantiate(bullet,firepoint.position,firepoint.rotation);
+                if(player.position.x > cannon.position.x)
+                {
+                    Instantiate(bullet,firepoint.position,firepoint.rotation);
+                }
+                else
+                {
+                    Instantiate(bullet,firepoint2.position,firepoint2.rotation);
+                }
+                
                 timebetween = starttimebetween;
     
             }
