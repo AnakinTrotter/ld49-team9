@@ -29,8 +29,8 @@ public class PlayerController : MonoBehaviour
         coll = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        Globals.debuffs.Add(Globals.DebuffState.invert);
-        Globals.debuffs.Add(Globals.DebuffState.slow);
+        // Globals.debuffs.Add(Globals.DebuffState.invert);
+        // Globals.debuffs.Add(Globals.DebuffState.slow);
     }
 
     // Update is called once per frame
