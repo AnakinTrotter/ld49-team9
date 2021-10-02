@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 14f;
 
     private enum MovementState { idle, running, jumping, falling }
-
     [SerializeField] private AudioSource jumpSoundEffect;
 
     private int jumpBufferCounter = 100; 
@@ -29,12 +28,15 @@ public class PlayerController : MonoBehaviour
         coll = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        // Globals.debuffs.Add(Globals.DebuffState.invert);
     }
 
     // Update is called once per frame
     private void Update()
     {
         dirX = Input.GetAxisRaw("Horizontal");
+        if(Globals.debuffs.Contains(Globals.DebuffState.invert))
+            dirX *= -1;
         rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
 
         if (Input.GetButton("Jump"))
