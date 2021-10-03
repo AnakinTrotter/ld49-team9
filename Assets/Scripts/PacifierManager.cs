@@ -8,6 +8,7 @@ public class PacifierManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Globals.currNumPacifiers = 0;
         children = new List<PacifierSpawner>();
         foreach(Transform t in transform)
         {
@@ -21,6 +22,7 @@ public class PacifierManager : MonoBehaviour
         if(Globals.shouldSpawn) {
             int idx = Random.Range(0, children.Count);
             children[idx].Spawn();
+            Globals.currNumPacifiers++;
             Globals.shouldSpawn = false;
             Debug.Log(children[idx]);
         }

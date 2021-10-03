@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Baby : MonoBehaviour
 {
-    public float cryInterval = 10f;
+    public float cryInterval = 15f;
     private float timeLeft;
     private enum BabyState { idle, crying }
     private Animator anim;
     // Start is called before the first frame update
     void Start()
     {
-        timeLeft = 5;
+        timeLeft = 10;
         anim = GetComponent<Animator>();
     }
 
@@ -21,12 +21,12 @@ public class Baby : MonoBehaviour
         if(Globals.babyRage > 10) {
             Globals.gameOver();
         }
-        BabyState state = timeLeft > 5 ? BabyState.crying : BabyState.idle;
+        BabyState state = timeLeft > (cryInterval - 5) ? BabyState.crying : BabyState.idle;
         if(timeLeft > 0) {
             timeLeft -= Time.deltaTime;
         } else {
             Cry();
-            float newTime = cryInterval - Globals.level;
+            float newTime = cryInterval - Globals.babyRage / 2;
             timeLeft = newTime >= 5 ? newTime : 5;
             if(Globals.babyRage >= 9) {
                 timeLeft = 5;

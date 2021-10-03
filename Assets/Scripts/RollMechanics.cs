@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class RollMechanics : MonoBehaviour
 {
+
+    void Update() {
+        // roll cooldown
+        if(PlayerController.rollTimer > 0) {
+            PlayerController.rollTimer -= Time.deltaTime;
+        }
+    }
     
     void RollStart()
     {
@@ -13,5 +20,6 @@ public class RollMechanics : MonoBehaviour
     void RollEnd()
     {
         PlayerController.IsRolling = false;
+        PlayerController.rollTimer = PlayerController.rollCooldown;
     }
 }

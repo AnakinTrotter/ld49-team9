@@ -9,7 +9,10 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer sprite;
     private Animator anim;
 
+
     [SerializeField] private LayerMask jumpableGround;
+
+    //comment for change
 
     private float dirX = 0f;
     private float speed = 0f;
@@ -31,6 +34,15 @@ public class PlayerController : MonoBehaviour
 
     public GameObject scanner;
     private float scanTimer, scanReady = 400;
+    public static float rollCooldown = 1f;
+    public static float rollTimer;
+
+    private float gravity;
+
+    // rewind fields
+    private Vector2 prevPos;
+    private float backCooldown = 4.0f;
+    private float backTimer;
 
     // Start is called before the first frame update
     private void Start()
@@ -41,11 +53,18 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         // Globals.debuffs.Add(Globals.DebuffState.invert);
         // Globals.debuffs.Add(Globals.DebuffState.slow);
+        // Globals.debuffs.Add(Globals.DebuffState.moon);
+        // Globals.debuffs.Add(Globals.DebuffState.fast);
+        Globals.debuffs.Add(Globals.DebuffState.rewind);
         jumpBufferCounter = 100;
         coyoteTimer = 0f;
         scanTimer = 200;
         wasGrounded = false;
         timerStart = false;
+        rollTimer = rollCooldown;
+        gravity = rb.gravityScale;
+        prevPos = transform.position;
+        backTimer = backCooldown;
     }
 
     // Update is called once per frame
@@ -54,16 +73,40 @@ public class PlayerController : MonoBehaviour
         dirX = Input.GetAxisRaw("Horizontal");
         speed = moveSpeed;
         scanTimer = Mathf.Min(scanTimer + 0.1f, scanReady);
+        rb.gravityScale = gravity;
 
         // account for debuffs
         if(Globals.debuffs.Contains(Globals.DebuffState.invert))
             dirX *= -1;
         if(Globals.debuffs.Contains(Globals.DebuffState.slow))
             speed /= 2;
+        if(Globals.debuffs.Contains(Globals.DebuffState.moon))
+            rb.gravityScale = gravity / 6;
+        if(Globals.debuffs.Contains(Globals.DebuffState.fast))
+            speed *= 10;
 
-        if (Input.GetKeyDown("f") && IsGrounded())
+        // time reverse timer logic
+        if(backTimer > 0) {
+            backTimer -= Time.deltaTime;
+        } else {
+            backTimer = backCooldown;
+            if(Globals.debuffs.Contains(Globals.DebuffState.rewind)) {
+                Vector2 temp = transform.position;
+                transform.position = prevPos;
+                prevPos = temp;
+            } else {
+                prevPos = transform.position;
+            }
+        }
+
+        // Start roll logic
+        if (Input.GetKeyDown("f") && IsGrounded() && rollTimer <= 0)
         {
-            rollDir = dirX;
+            if (sprite.flipX) {
+                rollDir = -1;
+            } else {
+                rollDir = 1;
+            }
             anim.SetTrigger("roll");
         }
 
@@ -79,13 +122,15 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(dirX * speed, rb.velocity.y);
         }
 
         if (Input.GetButton("Jump"))
         {
             jumpBufferCounter = 0;
         }
+        // End roll logic
+
         
         // START Coyote Time logic
         if (IsGrounded() && rb.velocity.y == 0)  // to make sure player is not in process of jumping
