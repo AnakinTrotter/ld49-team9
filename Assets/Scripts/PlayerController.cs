@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
         // Globals.debuffs.Add(Globals.DebuffState.slow);
         // Globals.debuffs.Add(Globals.DebuffState.moon);
         // Globals.debuffs.Add(Globals.DebuffState.fast);
-        Globals.debuffs.Add(Globals.DebuffState.rewind);
+        // Globals.debuffs.Add(Globals.DebuffState.rewind);
         jumpBufferCounter = 100;
         coyoteTimer = 0f;
         wasGrounded = false;
