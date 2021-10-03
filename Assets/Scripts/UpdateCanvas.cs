@@ -6,11 +6,10 @@ using UnityEngine.UI;
 public class UpdateCanvas : MonoBehaviour
 {
     Canvas currCanvas;
+    RectTransform canvasRect;
     // Lives Sprite
     [SerializeField] public Sprite heartTexture;
     private List<GameObject> heartList;
-    [SerializeField] private float heart_y = 172;
-    [SerializeField] private float heart_x = -413;
     [SerializeField] private float heart_scale = 0.8f;
     // Debuffs Sprite
     private List<GameObject> spriteList;
@@ -18,14 +17,18 @@ public class UpdateCanvas : MonoBehaviour
     void Start()
     {
         currCanvas = GetComponent<Canvas>();
+        canvasRect = GetComponent<RectTransform>();
         heartList = new List<GameObject>();
         for (int i = 0; i < Globals.lives; i++)
         {
             GameObject newObj = new GameObject();
+            
             Image heartImage = newObj.AddComponent<Image>();
             heartImage.sprite = heartTexture;
             newObj.GetComponent<RectTransform>().SetParent(currCanvas.transform);
-            heartImage.transform.localPosition = new Vector2(heart_x + (35 * i), heart_y);
+            Vector3[] v = new Vector3[4];
+            canvasRect.GetLocalCorners(v);
+            heartImage.transform.localPosition = v[1] + (Vector3.down*15) + (Vector3.right*15 + Vector3.right*i*30);
             heartImage.rectTransform.sizeDelta = new Vector2(heart_scale, heart_scale);
             newObj.SetActive(true);
 
