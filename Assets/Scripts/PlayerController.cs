@@ -42,7 +42,8 @@ public class PlayerController : MonoBehaviour
     private bool hasDoubleJump;
 
     public GameObject scanner;
-    private float scanTimer, scanCooldown = 10f;
+    public float scanTimer, scanCooldown = 10f;
+
     public static float rollCooldown = 1f;
     public static float rollTimer;
     public static float dashCooldown = 1f;
