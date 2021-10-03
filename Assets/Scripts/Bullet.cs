@@ -15,7 +15,9 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(Mathf.Abs(transform.position.x) > 100) {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
