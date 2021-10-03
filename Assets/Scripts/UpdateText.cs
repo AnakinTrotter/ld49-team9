@@ -16,6 +16,7 @@ public class UpdateText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        statusText.text = $"Level: {Globals.level.ToString()}   Lives: {Globals.lives.ToString()}   Pacifiers: {Globals.pacifiers.ToString()}";
+        statusText.text = $"Level: {Globals.level.ToString()}   Lives: {Globals.lives.ToString()}   Pacifiers: {Globals.pacifiers.ToString()}  " +
+            $"Baby Rage: {Globals.babyRage.ToString()}";
     }
 }

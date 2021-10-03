@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8161220339374798929}
   - component: {fileID: 8161220339374798932}
   - component: {fileID: 8161220339374798933}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Pacifier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
