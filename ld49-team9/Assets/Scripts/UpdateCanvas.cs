@@ -8,8 +8,8 @@ public class UpdateCanvas : MonoBehaviour
     Canvas currCanvas;
     [SerializeField] public Sprite heartTexture;
     [SerializeField] private List<GameObject> heartList;
-    [SerializeField] private float heart_y = 0.1f;
-    [SerializeField] private float heart_x = 0.1f;
+    [SerializeField] private float heart_y = 172;
+    [SerializeField] private float heart_x = -413;
     [SerializeField] private float heart_scale = 0.8f;
     // Start is called before the first frame update
     void Start()
@@ -21,10 +21,9 @@ public class UpdateCanvas : MonoBehaviour
             GameObject newObj = new GameObject();
             Image heartImage = newObj.AddComponent<Image>();
             heartImage.sprite = heartTexture;
-            //heartImage.transform.Translate(Vector2.up * heart_y);
-            //heartImage.transform.Translate(Vector2.left * heart_x);
-            heartImage.rectTransform.sizeDelta = new Vector2(heart_scale, heart_scale);
             newObj.GetComponent<RectTransform>().SetParent(currCanvas.transform);
+            heartImage.transform.localPosition = new Vector2(heart_x + (35 * i), heart_y);
+            heartImage.rectTransform.sizeDelta = new Vector2(heart_scale, heart_scale);
             newObj.SetActive(true);
 
 

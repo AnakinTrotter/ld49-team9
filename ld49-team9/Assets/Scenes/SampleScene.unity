@@ -180,6 +180,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d23b165c21654e73aebe0bbc66a03c0, type: 3}
+--- !u!1 &180870063 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 701618404804965506, guid: 7119bb98594b29847ac6497eca9408a5, type: 3}
+  m_PrefabInstance: {fileID: 1452375755}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &180870067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180870063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65bf71e7a9372bc4abbf2bfe78d2ea5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartTexture: {fileID: 21300000, guid: 68814f027e2e9cc49b99f27140f04f63, type: 3}
+  heartList: []
+  heart_y: 175
+  heart_x: -235
+  heart_scale: 0.8
 --- !u!1 &257533530
 GameObject:
   m_ObjectHideFlags: 0
