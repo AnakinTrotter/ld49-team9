@@ -28,7 +28,7 @@ public class ScanArrow : MonoBehaviour
             setAlpha(alpha - fadeSpeed);
         }
         Vector3 dir = pacifier.position - parent.position;
-        this.transform.position = parent.position + dir / dir.magnitude * 2;
+        this.transform.position = parent.position + dir / dir.magnitude * 2 - new Vector3(0,0,1);
         this.transform.rotation = Quaternion.Euler(0,0, Mathf.Rad2Deg * Mathf.Atan(dir.y / dir.x));
     }
 
