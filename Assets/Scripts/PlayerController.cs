@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
         if(Globals.debuffs.Contains(Globals.DebuffState.moon))
             rb.gravityScale = gravity / 6;
         if(Globals.debuffs.Contains(Globals.DebuffState.fast))
-            speed *= 10;
+            speed *= 4;
 
         // time reverse timer logic
         if(backTimer > 0) {
