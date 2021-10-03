@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
     private bool wasGrounded;           // for coyote time
     private bool timerStart;
 
+    public GameObject scanner;
+    private float scanTimer, scanCooldown = 10f;
     public static float rollCooldown = 1f;
     public static float rollTimer;
 
@@ -67,6 +69,7 @@ public class PlayerController : MonoBehaviour
     {
         dirX = Input.GetAxisRaw("Horizontal");
         speed = moveSpeed;
+        scanTimer = Mathf.Min(scanTimer + Time.deltaTime, scanCooldown);
         rb.gravityScale = gravity;
 
         // account for debuffs
@@ -104,6 +107,12 @@ public class PlayerController : MonoBehaviour
             anim.SetTrigger("roll");
         }
 
+        if (Input.GetKeyDown("e") && scanTimer >= scanCooldown)
+        {
+            Instantiate(scanner, this.transform);
+            scanTimer = 0;
+        }
+        
         if (IsRolling)
         {
             rb.velocity = new Vector2(rollDir * rollDistance, rb.velocity.y);
