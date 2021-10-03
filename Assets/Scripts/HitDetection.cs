@@ -5,6 +5,7 @@ using UnityEngine;
 public class HitDetection : MonoBehaviour
 {
     private Collider2D coll;
+    public static bool hideHitbox = false;
 
     private void Start()
     {
@@ -14,10 +15,11 @@ public class HitDetection : MonoBehaviour
 
     private void Update()
     {
-        if (PlayerController.IsRolling)
+        if (hideHitbox)
         {
             coll.enabled = false;
-        } else
+        } 
+        else
         {
             coll.enabled = true;
         }
