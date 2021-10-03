@@ -33,7 +33,8 @@ public class PlayerController : MonoBehaviour
     private enum MovementState { idle, running, jumping, falling }
     [SerializeField] private AudioSource jumpSoundEffect;
 
-    private int jumpBufferCounter; 
+    private int jumpBufferCounter;
+    private int jumpsBuffered;
     private int bufferMax = 10;         // max number of frames to allow before executing jump
     private float coyoteTimer;
     [SerializeField] private float coyoteMaxTime = 0.5f; // in seconds
@@ -75,6 +76,7 @@ public class PlayerController : MonoBehaviour
         wasGrounded = false;
         timerStart = false;
         hasDoubleJump = true;
+        jumpsBuffered = 0;
         rollTimer = rollCooldown;
         gravity = rb.gravityScale;
         prevPos = transform.position;
@@ -173,12 +175,6 @@ public class PlayerController : MonoBehaviour
         }
         // End roll physics
 
-        if (Input.GetButton("Jump"))
-        {
-            jumpBufferCounter = 0;
-        }
-        
-
 
         // START Coyote Time logic
         if (IsGrounded() && rb.velocity.y == 0)  // to make sure player is not in process of jumping
@@ -212,29 +208,40 @@ public class PlayerController : MonoBehaviour
         }
         // END Coyote Time logic
 
-        if (jumpBufferCounter < bufferMax)
-        {
-            jumpBufferCounter += 1;
-            if (IsGrounded())
-            {
-                // jumpSoundEffect.Play();
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            }
-        }
-
-        // Double jump logic
+        // Jump logic
         if (IsGrounded())
         {
             hasDoubleJump = true;  // reset for double jump
         }
 
-        if (Input.GetButtonDown("Jump") && !IsGrounded() && hasDoubleJump)
+        if (Input.GetButtonDown("Jump"))
         {
-            hasDoubleJump = false;
-            anim.SetTrigger("djump");
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            jumpBufferCounter = 0;
+            jumpsBuffered++;
+            if (!IsGrounded() && hasDoubleJump) 
+            {
+                hasDoubleJump = false;
+                jumpsBuffered = 0;
+                DoubleJump();
+            }
         }
-        
+
+        if (jumpBufferCounter < bufferMax)
+        {
+            jumpBufferCounter += 1;
+            if (IsGrounded())
+            { 
+                // jumpSoundEffect.Play();
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                if (jumpsBuffered > 1)
+                {
+                    DoubleJump();
+                    jumpsBuffered = 0;
+                    hasDoubleJump = false;
+                }
+            }
+        }
+
         UpdateAnimationState();
     }
 
@@ -269,6 +276,11 @@ public class PlayerController : MonoBehaviour
         anim.SetInteger("state", (int)state);
     }
 
+    private void DoubleJump()
+    {
+        anim.SetTrigger("djump");
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+    }
     private bool IsGrounded()
     {
         return Physics2D.BoxCast(coll.bounds.center, new Vector2(coll.bounds.size.x * 0.75f, 
