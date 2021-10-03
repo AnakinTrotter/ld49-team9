@@ -5,10 +5,11 @@ using UnityEngine;
 public class Scanner : MonoBehaviour
 {
     private static readonly float fadeSpeed = 0.05f;
-    private static readonly float growSpeed = 0.5f;
+    private static readonly float growSpeed = 0.75f;
     private static readonly float maxSize = 50;
     public GameObject scanArrow;
     private float size, alpha;
+    private bool scanned = false;
 
     // Start is called before the first frame update
     void Start()
@@ -26,17 +27,17 @@ public class Scanner : MonoBehaviour
             size += growSpeed;
             this.gameObject.transform.localScale = new Vector3(size, size, 0);
             setAlpha(alpha - fadeSpeed / 10);
+            return;
         }
-        else if (alpha > 0)
+        if (!scanned)
+            scanArea();
+        if (alpha > 0)
             setAlpha(alpha - fadeSpeed);
         else
-        {
-            scanArea();
             Destroy(this.gameObject);
-        }
     }
 
-    private GameObject[] scanArea()
+    private void scanArea()
     {
         Collider2D[] pacifiers = Physics2D.OverlapCircleAll(this.transform.position, maxSize / 2, 1 << 3);
         GameObject player = GameObject.FindWithTag("Player");
@@ -45,7 +46,6 @@ public class Scanner : MonoBehaviour
             scanArrow.GetComponent<ScanArrow>().pacifier = pacifier.transform;
             Instantiate(scanArrow, player.transform);
         }
-        return null;
     }
 
     private void setAlpha(float a)

@@ -161,6 +161,7 @@ MonoBehaviour:
   rollDistance: 20
   jumpSoundEffect: {fileID: 0}
   coyoteMaxTime: 0.1
+  scanner: {fileID: 3499748184585197068, guid: 9f595b554f036764a86dfeaf4693a55c, type: 3}
 --- !u!95 &619801501260624258
 Animator:
   serializedVersion: 3

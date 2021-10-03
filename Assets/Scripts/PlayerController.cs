@@ -29,6 +29,9 @@ public class PlayerController : MonoBehaviour
     private bool wasGrounded;           // for coyote time
     private bool timerStart;
 
+    public GameObject scanner;
+    private float scanTimer, scanReady = 400;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -40,6 +43,7 @@ public class PlayerController : MonoBehaviour
         // Globals.debuffs.Add(Globals.DebuffState.slow);
         jumpBufferCounter = 100;
         coyoteTimer = 0f;
+        scanTimer = 200;
         wasGrounded = false;
         timerStart = false;
     }
@@ -49,6 +53,7 @@ public class PlayerController : MonoBehaviour
     {
         dirX = Input.GetAxisRaw("Horizontal");
         speed = moveSpeed;
+        scanTimer = Mathf.Min(scanTimer + 0.1f, scanReady);
 
         // account for debuffs
         if(Globals.debuffs.Contains(Globals.DebuffState.invert))
@@ -62,6 +67,12 @@ public class PlayerController : MonoBehaviour
             anim.SetTrigger("roll");
         }
 
+        if (Input.GetKeyDown("e") && scanTimer >= scanReady)
+        {
+            Instantiate(scanner, this.transform);
+            scanTimer = 0;
+        }
+        
         if (IsRolling)
         {
             rb.velocity = new Vector2(rollDir * rollDistance, rb.velocity.y);
