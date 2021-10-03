@@ -14,12 +14,14 @@ public class RollMechanics : MonoBehaviour
     
     void RollStart()
     {
-        PlayerController.IsRolling = true;
+        PlayerController.currentRollState = PlayerController.rollState.rollStart;
+        HitDetection.hideHitbox = true;
     }
 
     void RollEnd()
     {
-        PlayerController.IsRolling = false;
+        PlayerController.currentRollState = PlayerController.rollState.rollEnd;
+        HitDetection.hideHitbox = false;
         PlayerController.rollTimer = PlayerController.rollCooldown;
     }
 }

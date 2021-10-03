@@ -12,14 +12,23 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private LayerMask jumpableGround;
 
+    // movement
     private float dirX = 0f;
+    private float prevDirX;
     private float speed = 0f;
-    public static bool IsRolling = false;
+
+    public enum rollState { idle, rollStart, rollEnd }
+    public static rollState currentRollState = rollState.idle;
     private float rollDir;
+    private Vector2 dashDir;
+    public enum dashState { idle, dashStart, dashEnd }
+    public static dashState currentDashState = dashState.idle;
+    public static bool IsDashing = false;
 
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float jumpForce = 14f;
     [SerializeField] private float rollSpeed = 20f;
+    [SerializeField] private float dashSpeed = 20f;
 
     private enum MovementState { idle, running, jumping, falling }
     [SerializeField] private AudioSource jumpSoundEffect;
@@ -36,6 +45,8 @@ public class PlayerController : MonoBehaviour
     private float scanTimer, scanCooldown = 10f;
     public static float rollCooldown = 1f;
     public static float rollTimer;
+    public static float dashCooldown = 1f;
+    public static float dashTimer;
 
 
     private float gravity;
@@ -112,33 +123,67 @@ public class PlayerController : MonoBehaviour
             anim.SetTrigger("roll");
         }
 
+        // Start: Aerial dash logic
+        if (Input.GetButtonDown("Fire3") && !IsGrounded() && dashTimer <= 0)
+        {
+            dashDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            Debug.Log(dashDir.ToString());
+            anim.SetTrigger("dash");
+        }
+        if (IsDashing)
+        {
+            rb.velocity = new Vector2(dashDir.x * dashSpeed, dashDir.y * dashSpeed);
+        }
+        // End: Aerial dash logic
+
+        // Scanner logic
         if (Input.GetKeyDown("e") && scanTimer >= scanCooldown)
         {
             Instantiate(scanner, this.transform);
             scanTimer = 0;
         }
-        
-        if (IsRolling)
+
+        // Improved horizontal movement
+        if (Mathf.Abs(rb.velocity.x) < moveSpeed && rb.velocity.x * dirX > 0)
         {
-            rb.velocity = new Vector2(rollDir * rollSpeed, rb.velocity.y);
-        }
-        else
+            rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
+        } else if (rb.velocity.x * dirX < 0)
         {
-            rb.velocity = new Vector2(dirX * speed, rb.velocity.y);
+            rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
+        } else if (rb.velocity.x == 0 && dirX != 0)
+        {
+            rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
+        } else if (rb.velocity.x != 0 && dirX == 0 && !IsDashing)
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
         }
+
+        // Roll physics
+        if (currentRollState == rollState.rollStart)
+        {
+            rb.velocity = new Vector2(rb.velocity.x + rollDir * rollSpeed, rb.velocity.y);
+            currentRollState = rollState.idle;
+        }
+
+        if (currentRollState == rollState.rollEnd)
+        {
+            rb.velocity = new Vector2(rb.velocity.x - rollDir * rollSpeed, rb.velocity.y);
+            currentRollState = rollState.idle;
+        }
+        // End roll pjysics
 
         if (Input.GetButton("Jump"))
         {
             jumpBufferCounter = 0;
         }
-        // End roll logic
+        
 
 
         // START Coyote Time logic
         if (IsGrounded() && rb.velocity.y == 0)  // to make sure player is not in process of jumping
         {
             wasGrounded = true;
-            hasDoubleJump = true;  // reset for double jump (unrelated to coyote time)
+            
         }
         else
         {
@@ -177,6 +222,11 @@ public class PlayerController : MonoBehaviour
         }
 
         // Double jump logic
+        if (IsGrounded())
+        {
+            hasDoubleJump = true;  // reset for double jump
+        }
+
         if (Input.GetButtonDown("Jump") && !IsGrounded() && hasDoubleJump)
         {
             hasDoubleJump = false;
