@@ -127,11 +127,10 @@ public class PlayerController : MonoBehaviour
         }
 
         // Start: Aerial dash logic
-        if (Input.GetButtonDown("Fire3") && !IsGrounded() && dashTimer <= 0)
+        if (Input.GetButtonDown("Fire3") && !IsGrounded() && rollTimer <= 0)
         {
-            dashDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-            Debug.Log(dashDir.ToString());
             anim.SetTrigger("dash");
+            dashDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         }
         if (IsDashing)
         {
