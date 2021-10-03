@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D coll;
     private SpriteRenderer sprite;
     private Animator anim;
-
+    private Transform player;
 
     [SerializeField] private LayerMask jumpableGround;
 
@@ -16,9 +16,10 @@ public class PlayerController : MonoBehaviour
     private float speed = 0f;
     public static bool IsRolling = false;
     private float rollDir;
+
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float jumpForce = 14f;
-    [SerializeField] private float rollDistance = 20f;
+    [SerializeField] private float rollSpeed = 20f;
 
     private enum MovementState { idle, running, jumping, falling }
     [SerializeField] private AudioSource jumpSoundEffect;
@@ -29,9 +30,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float coyoteMaxTime = 0.5f; // in seconds
     private bool wasGrounded;           // for coyote time
     private bool timerStart;
+    private bool hasDoubleJump;
 
     public static float rollCooldown = 1f;
     public static float rollTimer;
+
 
     private float gravity;
 
@@ -47,6 +50,7 @@ public class PlayerController : MonoBehaviour
         coll = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        player = GetComponent<Transform>();
         // Globals.debuffs.Add(Globals.DebuffState.invert);
         // Globals.debuffs.Add(Globals.DebuffState.slow);
         // Globals.debuffs.Add(Globals.DebuffState.moon);
@@ -56,6 +60,7 @@ public class PlayerController : MonoBehaviour
         coyoteTimer = 0f;
         wasGrounded = false;
         timerStart = false;
+        hasDoubleJump = true;
         rollTimer = rollCooldown;
         gravity = rb.gravityScale;
         prevPos = transform.position;
@@ -94,7 +99,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Start roll logic
-        if (Input.GetKeyDown("f") && IsGrounded() && rollTimer <= 0)
+        if (Input.GetButtonDown("Fire3") && IsGrounded() && rollTimer <= 0)
         {
             if (sprite.flipX) {
                 rollDir = -1;
@@ -106,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
         if (IsRolling)
         {
-            rb.velocity = new Vector2(rollDir * rollDistance, rb.velocity.y);
+            rb.velocity = new Vector2(rollDir * rollSpeed, rb.velocity.y);
         }
         else
         {
@@ -119,11 +124,12 @@ public class PlayerController : MonoBehaviour
         }
         // End roll logic
 
-        
+
         // START Coyote Time logic
         if (IsGrounded() && rb.velocity.y == 0)  // to make sure player is not in process of jumping
         {
             wasGrounded = true;
+            hasDoubleJump = true;  // reset for double jump (unrelated to coyote time)
         }
         else
         {
@@ -159,6 +165,13 @@ public class PlayerController : MonoBehaviour
                 // jumpSoundEffect.Play();
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             }
+        }
+
+        // Double jump logic
+        if (Input.GetButtonDown("Jump") && !IsGrounded() && hasDoubleJump)
+        {
+            hasDoubleJump = false;
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
         
         UpdateAnimationState();
