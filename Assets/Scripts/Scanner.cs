@@ -5,7 +5,7 @@ using UnityEngine;
 public class Scanner : MonoBehaviour
 {
     private static readonly float fadeSpeed = 0.05f;
-    private static readonly float growSpeed = 0.5f;
+    private static readonly float growSpeed = 0.75f;
     private static readonly float maxSize = 50;
     public GameObject scanArrow;
     private float size, alpha;
