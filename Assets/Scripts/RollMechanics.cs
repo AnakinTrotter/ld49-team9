@@ -7,7 +7,6 @@ public class RollMechanics : MonoBehaviour
 
     void Update() {
         // roll cooldown
-        Debug.Log(PlayerController.rollTimer);
         if(PlayerController.rollTimer > 0) {
             PlayerController.rollTimer -= Time.deltaTime;
         }

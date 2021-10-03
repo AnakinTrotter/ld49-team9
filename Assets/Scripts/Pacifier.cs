@@ -20,6 +20,9 @@ public class Pacifier : MonoBehaviour
     {
         if(col.gameObject.name.Equals("Player")) {
             Globals.pacifiers++;
+            Globals.currNumPacifiers--;
+            if (Globals.currNumPacifiers < Globals.maxNumPacifiers)
+                Globals.shouldSpawn = true;
             Destroy(gameObject);
             // Debug.Log(Globals.pacifiers);
         }

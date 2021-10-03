@@ -9,6 +9,8 @@ public static class Globals {
     public static int lives = 2;
     public static int babyRage = 0;
     public static bool shouldSpawn = true;
+    public static int currNumPacifiers = 0;
+    public static int maxNumPacifiers = 1;  // maximum number of pacifiers to exist in the level
 
     // keep track of player debuffs
     public enum DebuffState { invert, slow } 
