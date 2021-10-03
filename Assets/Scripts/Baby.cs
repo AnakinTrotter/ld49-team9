@@ -39,6 +39,7 @@ public class Baby : MonoBehaviour
     {
         Globals.debuffs.Clear();
         Globals.babyRage++;
+        DebuffRandomizer.ApplyDebuffs();
         // possible stuff to do:
         // give the player a debuff until the next tantrum
         // trigger a change in the house
