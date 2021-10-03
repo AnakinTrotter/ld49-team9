@@ -26,7 +26,7 @@ public class Baby : MonoBehaviour
             timeLeft -= Time.deltaTime;
         } else {
             Cry();
-            float newTime = cryInterval - Globals.level;
+            float newTime = cryInterval - Globals.babyRage / 2;
             timeLeft = newTime >= 5 ? newTime : 5;
             if(Globals.babyRage >= 9) {
                 timeLeft = 5;

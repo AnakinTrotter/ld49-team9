@@ -29,6 +29,9 @@ public class PlayerController : MonoBehaviour
     private bool wasGrounded;           // for coyote time
     private bool timerStart;
 
+    public static float rollCooldown = 1f;
+    public static float rollTimer;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -42,6 +45,7 @@ public class PlayerController : MonoBehaviour
         coyoteTimer = 0f;
         wasGrounded = false;
         timerStart = false;
+        rollTimer = rollCooldown;
     }
 
     // Update is called once per frame
@@ -56,7 +60,7 @@ public class PlayerController : MonoBehaviour
         if(Globals.debuffs.Contains(Globals.DebuffState.slow))
             speed /= 2;
 
-        if (Input.GetKeyDown("f") && IsGrounded())
+        if (Input.GetKeyDown("f") && IsGrounded() && rollTimer <= 0)
         {
             rollDir = dirX;
             anim.SetTrigger("roll");
