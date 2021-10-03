@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer sprite;
     private Animator anim;
 
+
     [SerializeField] private LayerMask jumpableGround;
 
     private float dirX = 0f;
@@ -60,9 +61,14 @@ public class PlayerController : MonoBehaviour
         if(Globals.debuffs.Contains(Globals.DebuffState.slow))
             speed /= 2;
 
+        // Start roll logic
         if (Input.GetKeyDown("f") && IsGrounded() && rollTimer <= 0)
         {
-            rollDir = dirX;
+            if (sprite.flipX) {
+                rollDir = -1;
+            } else {
+                rollDir = 1;
+            }
             anim.SetTrigger("roll");
         }
 
@@ -79,6 +85,8 @@ public class PlayerController : MonoBehaviour
         {
             jumpBufferCounter = 0;
         }
+        // End roll logic
+
         
         // START Coyote Time logic
         if (IsGrounded() && rb.velocity.y == 0)  // to make sure player is not in process of jumping
