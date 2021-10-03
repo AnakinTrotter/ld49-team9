@@ -35,6 +35,11 @@ public class PlayerController : MonoBehaviour
 
     private float gravity;
 
+    // rewind fields
+    private Vector2 prevPos;
+    private float backCooldown = 4.0f;
+    private float backTimer;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -44,12 +49,17 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         // Globals.debuffs.Add(Globals.DebuffState.invert);
         // Globals.debuffs.Add(Globals.DebuffState.slow);
+        // Globals.debuffs.Add(Globals.DebuffState.moon);
+        // Globals.debuffs.Add(Globals.DebuffState.fast);
+        Globals.debuffs.Add(Globals.DebuffState.rewind);
         jumpBufferCounter = 100;
         coyoteTimer = 0f;
         wasGrounded = false;
         timerStart = false;
         rollTimer = rollCooldown;
         gravity = rb.gravityScale;
+        prevPos = transform.position;
+        backTimer = backCooldown;
     }
 
     // Update is called once per frame
@@ -57,6 +67,7 @@ public class PlayerController : MonoBehaviour
     {
         dirX = Input.GetAxisRaw("Horizontal");
         speed = moveSpeed;
+        rb.gravityScale = gravity;
 
         // account for debuffs
         if(Globals.debuffs.Contains(Globals.DebuffState.invert))
@@ -65,8 +76,22 @@ public class PlayerController : MonoBehaviour
             speed /= 2;
         if(Globals.debuffs.Contains(Globals.DebuffState.moon))
             rb.gravityScale = gravity / 6;
-        else
-            rb.gravityScale = gravity;
+        if(Globals.debuffs.Contains(Globals.DebuffState.fast))
+            speed *= 10;
+
+        // time reverse timer logic
+        if(backTimer > 0) {
+            backTimer -= Time.deltaTime;
+        } else {
+            backTimer = backCooldown;
+            if(Globals.debuffs.Contains(Globals.DebuffState.rewind)) {
+                Vector2 temp = transform.position;
+                transform.position = prevPos;
+                prevPos = temp;
+            } else {
+                prevPos = transform.position;
+            }
+        }
 
         // Start roll logic
         if (Input.GetKeyDown("f") && IsGrounded() && rollTimer <= 0)
@@ -85,7 +110,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(dirX * speed, rb.velocity.y);
         }
 
         if (Input.GetButton("Jump"))
