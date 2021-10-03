@@ -5,14 +5,14 @@ using UnityEngine;
 public class DashMechanics : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Update()
-    {
-        // dash cooldown
-        if (PlayerController.dashTimer > 0)
-        {
-            PlayerController.dashTimer -= Time.deltaTime;
-        }
-    }
+    //void Update()
+    //{
+    //    // dash cooldown
+    //    if (PlayerController.dashTimer > 0)
+    //    {
+    //        PlayerController.dashTimer -= Time.deltaTime;
+    //    }
+    //}
 
     void DashStart()
     {
@@ -24,6 +24,6 @@ public class DashMechanics : MonoBehaviour
     {
         PlayerController.IsDashing = false;
         HitDetection.hideHitbox = false;
-        PlayerController.dashTimer = PlayerController.dashCooldown;
+        PlayerController.rollTimer = PlayerController.rollCooldown;
     }
 }

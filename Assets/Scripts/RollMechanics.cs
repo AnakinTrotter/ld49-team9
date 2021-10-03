@@ -16,12 +16,13 @@ public class RollMechanics : MonoBehaviour
     {
         PlayerController.currentRollState = PlayerController.rollState.rollStart;
         HitDetection.hideHitbox = true;
+        PlayerController.rollTimer = PlayerController.rollCooldown;
     }
 
     void RollEnd()
     {
         PlayerController.currentRollState = PlayerController.rollState.rollEnd;
         HitDetection.hideHitbox = false;
-        PlayerController.rollTimer = PlayerController.rollCooldown;
+        
     }
 }
