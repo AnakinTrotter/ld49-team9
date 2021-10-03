@@ -180,6 +180,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && !IsGrounded() && hasDoubleJump)
         {
             hasDoubleJump = false;
+            anim.SetTrigger("djump");
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
         
