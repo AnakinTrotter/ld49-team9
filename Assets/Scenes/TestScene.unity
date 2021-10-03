@@ -754,6 +754,18 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 619801501260624268, guid: 6ced6a7cc616e7f428ffe201dbea9054, type: 3}
   m_PrefabInstance: {fileID: 619801500242737993}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &869386594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869386587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8878a2a9f80424fa91d0e9980ad366, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1014262176
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2203,7 +2215,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 619801501260624270, guid: 6ced6a7cc616e7f428ffe201dbea9054, type: 3}
       propertyPath: dashSpeed
-      value: 20
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 619801501260624271, guid: 6ced6a7cc616e7f428ffe201dbea9054, type: 3}
       propertyPath: m_RootOrder

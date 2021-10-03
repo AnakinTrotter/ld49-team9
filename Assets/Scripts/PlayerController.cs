@@ -171,7 +171,7 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x - rollDir * rollSpeed, rb.velocity.y);
             currentRollState = rollState.idle;
         }
-        // End roll pjysics
+        // End roll physics
 
         if (Input.GetButton("Jump"))
         {
