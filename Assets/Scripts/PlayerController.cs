@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     private bool timerStart;
 
     public GameObject scanner;
-    private float scanTimer, scanReady = 400;
+    private float scanTimer, scanReady = 4f;
     public static float rollCooldown = 1f;
     public static float rollTimer;
 
@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
         // Globals.debuffs.Add(Globals.DebuffState.rewind);
         jumpBufferCounter = 100;
         coyoteTimer = 0f;
-        scanTimer = 200;
+        scanTimer = 4f;
         wasGrounded = false;
         timerStart = false;
         rollTimer = rollCooldown;
@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
     {
         dirX = Input.GetAxisRaw("Horizontal");
         speed = moveSpeed;
-        scanTimer = Mathf.Min(scanTimer + 0.1f, scanReady);
+        scanTimer = Mathf.Min(scanTimer + Time.deltaTime, scanReady);
         rb.gravityScale = gravity;
 
         // account for debuffs
