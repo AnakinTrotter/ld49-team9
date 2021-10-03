@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     public static float rollCooldown = 1f;
     public static float rollTimer;
 
+    private float gravity;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -47,6 +49,7 @@ public class PlayerController : MonoBehaviour
         wasGrounded = false;
         timerStart = false;
         rollTimer = rollCooldown;
+        gravity = rb.gravityScale;
     }
 
     // Update is called once per frame
@@ -60,6 +63,10 @@ public class PlayerController : MonoBehaviour
             dirX *= -1;
         if(Globals.debuffs.Contains(Globals.DebuffState.slow))
             speed /= 2;
+        if(Globals.debuffs.Contains(Globals.DebuffState.moon))
+            rb.gravityScale = gravity / 6;
+        else
+            rb.gravityScale = gravity;
 
         // Start roll logic
         if (Input.GetKeyDown("f") && IsGrounded() && rollTimer <= 0)
