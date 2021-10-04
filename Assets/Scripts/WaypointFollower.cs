@@ -11,9 +11,9 @@ public class WaypointFollower : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(Vector2.Distance(waypoints[currentWaypointIndex].transform.position, transform.position));
-        Debug.Log(waypoints[currentWaypointIndex].transform.position);
-        Debug.Log(transform.position);
+        //Debug.Log(Vector2.Distance(waypoints[currentWaypointIndex].transform.position, transform.position));
+        //Debug.Log(waypoints[currentWaypointIndex].transform.position);
+        //Debug.Log(transform.position);
         if (Vector2.Distance(waypoints[currentWaypointIndex].transform.position, transform.position) < .1f)
         {
             currentWaypointIndex++;

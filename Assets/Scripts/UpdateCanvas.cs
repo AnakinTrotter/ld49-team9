@@ -10,7 +10,7 @@ public class UpdateCanvas : MonoBehaviour
     // Lives Sprite
     [SerializeField] public Sprite heartTexture;
     private List<GameObject> heartList;
-    [SerializeField] private float heart_scale = 0.8f;
+    [SerializeField] private float heart_scale = 0.65f;
     private Vector3[] canvasCorners = new Vector3[4];
     // Debuffs Sprite
     [SerializeField] private Dictionary<Globals.DebuffState, GameObject> debuffList = new Dictionary<Globals.DebuffState, GameObject>();
@@ -37,11 +37,11 @@ public class UpdateCanvas : MonoBehaviour
             heartImage.sprite = heartTexture;
             newObj.GetComponent<RectTransform>().SetParent(currCanvas.transform);
             canvasRect.GetLocalCorners(canvasCorners);    // get 4 corners of canvas
-            heartImage.transform.localPosition = canvasCorners[1] + (Vector3.up*0.5f*heartRect.rect.y) + 
-                (Vector3.left*heartRect.rect.x*0.5f + Vector3.left*i*heartRect.rect.x*0.75f);
-            heartImage.rectTransform.sizeDelta = new Vector2(heart_scale, heart_scale);
+            heartImage.rectTransform.localScale = new Vector2(heart_scale, heart_scale);
+            heartImage.transform.localPosition = canvasCorners[1] + (Vector3.up*0.75f*heartRect.rect.y) + 
+                (Vector3.left*heartRect.rect.x*0.75f + Vector3.left*i*heartRect.rect.x*1.5f);
             newObj.SetActive(true);
-
+            Debug.Log(heartRect.localScale);
             heartList.Add(newObj);
         }
 

@@ -299,10 +299,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 701618404542828019, guid: 7119bb98594b29847ac6497eca9408a5, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 701618404804965506, guid: 7119bb98594b29847ac6497eca9408a5, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -395,22 +391,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1237884222}
-    - target: {fileID: 701618404804965567, guid: 7119bb98594b29847ac6497eca9408a5, type: 3}
-      propertyPath: m_PlaneDistance
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 6331631481990378239, guid: 7119bb98594b29847ac6497eca9408a5, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6331631481992574977, guid: 7119bb98594b29847ac6497eca9408a5, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6331631482532985921, guid: 7119bb98594b29847ac6497eca9408a5, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7119bb98594b29847ac6497eca9408a5, type: 3}
 --- !u!1 &1114242114
