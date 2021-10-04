@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class Pacifier : MonoBehaviour
 {
-    [SerializeField] float collectSpeed = 25;
+    public static float collectSpeed = 8f;
+    public static float collectThreshold = 5.55f;
     private Rigidbody2D rb;
     private GameObject depositPos;
+    private float origSize, origDist;
     // Start is called before the first frame update
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
         depositPos = GameObject.Find("PacifierSprite");
+        origSize = transform.localScale.x;
     }
 
     // Update is called once per frame
@@ -20,8 +23,12 @@ public class Pacifier : MonoBehaviour
         if(rb.isKinematic)
         {
             Vector3 dir = depositPos.transform.position - this.transform.position;
-            rb.velocity = dir.normalized * collectSpeed;
-            if (dir.magnitude < 8)
+            float size = (dir.magnitude - collectThreshold/2) / (origDist - collectThreshold/2) * origSize;
+            size = Mathf.Min(origSize, Mathf.Max(size, origSize / 2));
+            transform.localScale = new Vector3(size, size, 1);
+            rb.velocity = dir / dir.magnitude * collectSpeed;
+            Debug.Log(dir.magnitude + "/" + origDist);
+            if (dir.magnitude < collectThreshold)
             {
                 Globals.pacifiers++;
                 // Globals.currNumPacifiers--;
@@ -36,6 +43,8 @@ public class Pacifier : MonoBehaviour
     {
         if(col.gameObject.name.Equals("Player"))
         {
+            Vector3 dir = depositPos.transform.position - this.transform.position;
+            origDist = dir.magnitude;
             rb.isKinematic = true;
             // Debug.Log(Globals.pacifiers);
         }

@@ -75,7 +75,6 @@ public class Baby : MonoBehaviour
         {
             Instantiate(returningPacifier, pacifierSprite.transform);
             Globals.pacifiers--;
-            Globals.currNumPacifiers--;
             yield return new WaitForSeconds(0.25f);
         }
     }

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ReturningPacifier : MonoBehaviour
 {
-    [SerializeField] float returnSpeed = 25;
+    public static float collectSpeed = 8f;
+    public static float collectThreshold = 4.55f;
     private Rigidbody2D rb;
     private GameObject baby;
     // Start is called before the first frame update
@@ -18,10 +19,11 @@ public class ReturningPacifier : MonoBehaviour
     void Update()
     {
         Vector3 dir = baby.transform.position - this.transform.position;
-        rb.velocity = dir.normalized * returnSpeed;
-        if (dir.magnitude < 8)
+        rb.velocity = dir / dir.magnitude * collectSpeed;
+        if (dir.magnitude < collectThreshold)
         {
             Globals.babyRage--;
+            Globals.currNumPacifiers--;
             Destroy(this.gameObject);
         }
     }
