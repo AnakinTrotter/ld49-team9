@@ -178,6 +178,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nail (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8349037265459034578, guid: 744f79dc8348c90439cb47e1c5be54b7, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 744f79dc8348c90439cb47e1c5be54b7, type: 3}
 --- !u!1001 &149766403
@@ -789,7 +793,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 37
+  m_RootOrder: 40
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &807564153 stripped
 Transform:
@@ -850,6 +854,10 @@ PrefabInstance:
     - target: {fileID: 8349037265459034578, guid: 744f79dc8348c90439cb47e1c5be54b7, type: 3}
       propertyPath: m_Name
       value: Nail (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349037265459034578, guid: 744f79dc8348c90439cb47e1c5be54b7, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 744f79dc8348c90439cb47e1c5be54b7, type: 3}
@@ -1152,7 +1160,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 701618404804965566, guid: 7119bb98594b29847ac6497eca9408a5, type: 3}
       propertyPath: m_RootOrder
-      value: 24
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 701618404804965566, guid: 7119bb98594b29847ac6497eca9408a5, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1312,7 +1320,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 34
+  m_RootOrder: 35
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1139949409
 GameObject:
@@ -1496,7 +1504,7 @@ Transform:
   - {fileID: 1945807273}
   - {fileID: 1507724201}
   m_Father: {fileID: 0}
-  m_RootOrder: 42
+  m_RootOrder: 44
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1155725317
 PrefabInstance:
@@ -1704,7 +1712,7 @@ Transform:
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 32
+  m_RootOrder: 33
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1193492951
 PrefabInstance:
@@ -1713,6 +1721,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1531291314, guid: 6ced6a7cc616e7f428ffe201dbea9054, type: 3}
+      propertyPath: m_Size.y
+      value: 0.40295738
+      objectReference: {fileID: 0}
+    - target: {fileID: 1531291314, guid: 6ced6a7cc616e7f428ffe201dbea9054, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.008059531
+      objectReference: {fileID: 0}
     - target: {fileID: 619801501260624268, guid: 6ced6a7cc616e7f428ffe201dbea9054, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2062,6 +2078,10 @@ PrefabInstance:
     - target: {fileID: 8349037265459034578, guid: 744f79dc8348c90439cb47e1c5be54b7, type: 3}
       propertyPath: m_Name
       value: Nail (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349037265459034578, guid: 744f79dc8348c90439cb47e1c5be54b7, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 744f79dc8348c90439cb47e1c5be54b7, type: 3}
@@ -9205,6 +9225,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nail (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 8349037265459034578, guid: 744f79dc8348c90439cb47e1c5be54b7, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 744f79dc8348c90439cb47e1c5be54b7, type: 3}
 --- !u!1 &1677356748
@@ -9344,6 +9368,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nail (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 8349037265459034578, guid: 744f79dc8348c90439cb47e1c5be54b7, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 744f79dc8348c90439cb47e1c5be54b7, type: 3}
 --- !u!1001 &1692351251
@@ -9465,6 +9493,10 @@ PrefabInstance:
     - target: {fileID: 8349037265459034578, guid: 744f79dc8348c90439cb47e1c5be54b7, type: 3}
       propertyPath: m_Name
       value: Nail (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349037265459034578, guid: 744f79dc8348c90439cb47e1c5be54b7, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 744f79dc8348c90439cb47e1c5be54b7, type: 3}
@@ -17393,6 +17425,10 @@ PrefabInstance:
     - target: {fileID: 8349037265459034578, guid: 744f79dc8348c90439cb47e1c5be54b7, type: 3}
       propertyPath: m_Name
       value: Nail
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349037265459034578, guid: 744f79dc8348c90439cb47e1c5be54b7, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 744f79dc8348c90439cb47e1c5be54b7, type: 3}
