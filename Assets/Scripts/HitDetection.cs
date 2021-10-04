@@ -15,7 +15,7 @@ public class HitDetection : MonoBehaviour
 
     private void Update()
     {
-        if (hideHitbox)
+        if (hideHitbox) // To handle roll invincibility
         {
             coll.enabled = false;
         } 

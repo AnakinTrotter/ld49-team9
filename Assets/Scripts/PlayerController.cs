@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
 
     public enum rollState { idle, rollStart, rollEnd }
     public static rollState currentRollState = rollState.idle;
+    public static bool IsRolling = false;
     private float rollDir;
     private Vector2 dashDir;
     public enum dashState { idle, dashStart, dashEnd }
@@ -146,30 +147,38 @@ public class PlayerController : MonoBehaviour
         }
 
         // Improved horizontal movement
-        if (Mathf.Abs(rb.velocity.x) < moveSpeed && rb.velocity.x * dirX > 0)
+        if (!IsRolling)
         {
-            rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
-        } else if (rb.velocity.x * dirX < 0)
-        {
-            rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
-        } else if (rb.velocity.x == 0 && dirX != 0)
-        {
-            rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
-        } else if (rb.velocity.x != 0 && dirX == 0 && !IsDashing)
-        {
-            rb.velocity = new Vector2(0, rb.velocity.y);
+            if (Mathf.Abs(rb.velocity.x) < moveSpeed && rb.velocity.x * dirX > 0)
+            {
+                rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
+            }
+            else if (rb.velocity.x * dirX < 0)
+            {
+                rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
+            }
+            else if (rb.velocity.x == 0 && dirX != 0)
+            {
+                rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
+            }
+            else if (rb.velocity.x != 0 && dirX == 0 && !IsDashing)
+            {
+                rb.velocity = new Vector2(0, rb.velocity.y);
+            }
         }
 
         // Roll physics
         if (currentRollState == rollState.rollStart)
         {
             rb.velocity = new Vector2(rb.velocity.x + rollDir * rollSpeed, rb.velocity.y);
+            IsRolling = true;
             currentRollState = rollState.idle;
         }
 
         if (currentRollState == rollState.rollEnd)
         {
             rb.velocity = new Vector2(rb.velocity.x - rollDir * rollSpeed, rb.velocity.y);
+            IsRolling = false;
             currentRollState = rollState.idle;
         }
         // End roll physics
@@ -179,7 +188,6 @@ public class PlayerController : MonoBehaviour
         if (IsGrounded() && rb.velocity.y == 0)  // to make sure player is not in process of jumping
         {
             wasGrounded = true;
-            
         }
         else
         {
