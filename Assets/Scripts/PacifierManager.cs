@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class PacifierManager : MonoBehaviour
 {
@@ -37,7 +39,8 @@ public class PacifierManager : MonoBehaviour
         // }
         if(Globals.currNumPacifiers <= 0) {
             Globals.level++;
-            Globals.RestartLevel();
+            SceneManager.LoadScene("LevelComplete");
+            //Globals.RestartLevel();
         }
     }
 }
