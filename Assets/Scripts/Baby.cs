@@ -9,6 +9,7 @@ public class Baby : MonoBehaviour
     private float timeLeft;
     private enum BabyState { idle, crying }
     private Animator anim;
+    private AudioSource audioSource;
     // Start is called before the first frame update
 
     private float debuffCooldown = 10f;
@@ -18,6 +19,7 @@ public class Baby : MonoBehaviour
     {
         timeLeft = 10;
         anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -53,6 +55,7 @@ public class Baby : MonoBehaviour
         Globals.babyRage++;
         DebuffRandomizer.ApplyDebuffs();
         Globals.debuffChanged = true;
+        audioSource.Play();
         // possible stuff to do:
         // give the player a debuff until the next tantrum
         // trigger a change in the house
