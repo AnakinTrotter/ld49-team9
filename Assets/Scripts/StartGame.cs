@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class StartGame : MonoBehaviour
 {
-    [SerializeField] private int startingScene = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +16,7 @@ public class StartGame : MonoBehaviour
     {
         if (Input.anyKey || Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
         {
-            SceneManager.LoadScene(startingScene);
+            SceneManager.LoadScene("Rooms");
         }
     }
 }

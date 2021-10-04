@@ -12,16 +12,23 @@ public class UpdateCanvas : MonoBehaviour
     private List<GameObject> heartList;
     [SerializeField] private float heart_scale = 0.8f;
     private Vector3[] canvasCorners = new Vector3[4];
-    private float heart_x;
-    private float heart_y;
     // Debuffs Sprite
-    private List<GameObject> spriteList;
+    [SerializeField] private Dictionary<Globals.DebuffState, GameObject> debuffList = new Dictionary<Globals.DebuffState, GameObject>();
+    private Dictionary<Globals.DebuffState, string> debuffDict = new Dictionary<Globals.DebuffState, string> 
+        {
+        {Globals.DebuffState.slow, "Slowed!" },
+        {Globals.DebuffState.fast, "Speedy!" },
+        {Globals.DebuffState.invert, "Inverted Controls!" },
+        {Globals.DebuffState.moon, "Moon!" },
+        {Globals.DebuffState.rewind, "Rewinded!" }
+        };
     // Start is called before the first frame update
     void Start()
     {
         currCanvas = GetComponent<Canvas>();
         canvasRect = GetComponent<RectTransform>();
         heartList = new List<GameObject>();
+        // Add hearts to screen
         for (int i = 0; i < Globals.lives; i++)
         {
             GameObject newObj = new GameObject();
@@ -34,7 +41,6 @@ public class UpdateCanvas : MonoBehaviour
                 (Vector3.left*heartRect.rect.x*0.5f + Vector3.left*i*heartRect.rect.x*0.75f);
             heartImage.rectTransform.sizeDelta = new Vector2(heart_scale, heart_scale);
             newObj.SetActive(true);
-
 
             heartList.Add(newObj);
         }
@@ -49,6 +55,52 @@ public class UpdateCanvas : MonoBehaviour
         {
             Destroy(heartList[heartList.Count - 1]);
             heartList.RemoveAt(heartList.Count - 1);
+        }
+        if (Globals.debuffs.Count > debuffList.Count)
+        {
+            // Find new debuffs
+            List<Globals.DebuffState> newDebuffs = new List<Globals.DebuffState>();
+            foreach (var debuff in Globals.debuffs)
+            {
+                if (!debuffList.ContainsKey(debuff))
+                {
+                    newDebuffs.Add(debuff);
+                }
+            }
+            foreach (var debuff in newDebuffs)
+            {
+                // Add debuff text
+                GameObject debuffInd = new GameObject("DebuffText");
+                Text debuffText = debuffInd.AddComponent<Text>();
+                debuffText.text = debuffDict[debuff];
+                debuffText.color = Color.red;
+                Font ArialFont = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
+                debuffText.font = ArialFont;
+                debuffText.material = ArialFont.material;
+                debuffInd.transform.SetParent(currCanvas.transform);
+                debuffText.transform.localPosition = canvasCorners[2];
+                debuffInd.SetActive(true);
+                debuffList.Add(debuff, debuffInd);
+            }
+        }
+        else if (Globals.debuffs.Count < debuffList.Count)
+        {
+            // Find old debuffs
+            List<Globals.DebuffState> oldDebuffs = new List<Globals.DebuffState>();
+            foreach (var debuff in debuffList)
+            {
+                if (!Globals.debuffs.Contains(debuff.Key))
+                {
+                    oldDebuffs.Add(debuff.Key);
+                }
+            }
+            foreach (var debuff in oldDebuffs)
+            {
+                Destroy(debuffList[debuff]);
+                debuffList.Remove(debuff);
+            }
+            
+            
         }
     }
 }
