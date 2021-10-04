@@ -16,7 +16,7 @@ public class GameOver : MonoBehaviour
     {
         if (Input.GetKey("r"))
         {
-            SceneManager.LoadScene("Rooms");
+            SceneManager.LoadScene("NewLevel");
         }
     }
 }
