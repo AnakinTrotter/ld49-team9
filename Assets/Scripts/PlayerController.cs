@@ -82,6 +82,8 @@ public class PlayerController : MonoBehaviour
         gravity = rb.gravityScale;
         prevPos = transform.position;
         backTimer = backCooldown;
+        Globals.lives = 2;
+        Globals.pacifiers = 0;
     }
 
     // Update is called once per frame

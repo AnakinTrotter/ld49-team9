@@ -58,58 +58,58 @@ public class UpdateCanvas : MonoBehaviour
             Destroy(heartList[heartList.Count - 1]);
             heartList.RemoveAt(heartList.Count - 1);
         }
-        if (Globals.debuffs.Count > debuffList.Count)
-        {
-            // Find new debuffs
-            List<Globals.DebuffState> newDebuffs = new List<Globals.DebuffState>();
-            foreach (var debuff in Globals.debuffs)
-            {
-                if (!debuffList.ContainsKey(debuff))
-                {
-                    newDebuffs.Add(debuff);
-                }
-            }
-            foreach (var debuff in newDebuffs)
-            {
-                // Add debuff text
-                GameObject debuffInd = new GameObject("DebuffText");
-                debuffInd.layer = LayerMask.NameToLayer("UI");
+        // if (Globals.debuffs.Count > debuffList.Count)
+        // {
+        //     // Find new debuffs
+        //     List<Globals.DebuffState> newDebuffs = new List<Globals.DebuffState>();
+        //     foreach (var debuff in Globals.debuffs)
+        //     {
+        //         if (!debuffList.ContainsKey(debuff))
+        //         {
+        //             newDebuffs.Add(debuff);
+        //         }
+        //     }
+        //     foreach (var debuff in newDebuffs)
+        //     {
+        //         // Add debuff text
+        //         GameObject debuffInd = new GameObject("DebuffText");
+        //         debuffInd.layer = LayerMask.NameToLayer("UI");
                 
-                Text debuffText = debuffInd.AddComponent<Text>();
-                //RectTransform textRect = debuffInd.GetComponent<RectTransform>();
+        //         Text debuffText = debuffInd.AddComponent<Text>();
+        //         //RectTransform textRect = debuffInd.GetComponent<RectTransform>();
 
-                debuffText.text = debuffDict[debuff];
-                debuffText.color = Color.red;
-                Font ArialFont = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
-                debuffText.font = ArialFont;
-                debuffText.fontSize = 25;
-                debuffText.material = ArialFont.material;
-                debuffText.alignment = TextAnchor.MiddleRight;
-                debuffInd.transform.SetParent(currCanvas.transform);
-                debuffText.transform.localPosition = canvasCorners[2] + Vector3.down*100+Vector3.down*75 + Vector3.left*100;
-                debuffText.transform.localScale = new Vector3(1f, 1f, 1f);
-                debuffInd.SetActive(true);
-                debuffList.Add(debuff, debuffInd);
-            }
-        }
-        else if (Globals.debuffs.Count < debuffList.Count)
-        {
-            // Find old debuffs
-            List<Globals.DebuffState> oldDebuffs = new List<Globals.DebuffState>();
-            foreach (var debuff in debuffList)
-            {
-                if (!Globals.debuffs.Contains(debuff.Key))
-                {
-                    oldDebuffs.Add(debuff.Key);
-                }
-            }
-            foreach (var debuff in oldDebuffs)
-            {
-                Destroy(debuffList[debuff]);
-                debuffList.Remove(debuff);
-            }
+        //         debuffText.text = debuffDict[debuff];
+        //         debuffText.color = Color.red;
+        //         Font ArialFont = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
+        //         debuffText.font = ArialFont;
+        //         debuffText.fontSize = 25;
+        //         debuffText.material = ArialFont.material;
+        //         debuffText.alignment = TextAnchor.MiddleRight;
+        //         debuffInd.transform.SetParent(currCanvas.transform);
+        //         debuffText.transform.localPosition = canvasCorners[2] + Vector3.down*100+Vector3.down*75 + Vector3.left*100;
+        //         debuffText.transform.localScale = new Vector3(1f, 1f, 1f);
+        //         debuffInd.SetActive(true);
+        //         debuffList.Add(debuff, debuffInd);
+        //     }
+        // }
+        // else if (Globals.debuffs.Count < debuffList.Count)
+        // {
+        //     // Find old debuffs
+        //     List<Globals.DebuffState> oldDebuffs = new List<Globals.DebuffState>();
+        //     foreach (var debuff in debuffList)
+        //     {
+        //         if (!Globals.debuffs.Contains(debuff.Key))
+        //         {
+        //             oldDebuffs.Add(debuff.Key);
+        //         }
+        //     }
+        //     foreach (var debuff in oldDebuffs)
+        //     {
+        //         Destroy(debuffList[debuff]);
+        //         debuffList.Remove(debuff);
+        //     }
             
             
-        }
+        // }
     }
 }

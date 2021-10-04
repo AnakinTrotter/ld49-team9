@@ -10,12 +10,13 @@ public class RageBar : MonoBehaviour
     void Start()
     {
         bar = GetComponent<Image>();
+        bar.fillAmount = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        setColor();
+        // setColor();
         setSize();
     }
 
