@@ -86,6 +86,7 @@ public class UpdateCanvas : MonoBehaviour
                     newDebuffs.Add(debuff);
                 }
             }
+            int i = 0;
             foreach (var debuff in newDebuffs)
             {
                 // Add debuff text
@@ -102,11 +103,12 @@ public class UpdateCanvas : MonoBehaviour
                 debuffText.material = ArialFont.material;
                 debuffText.alignment = TextAnchor.MiddleRight;
                 debuffInd.transform.SetParent(currCanvas.transform);
-                debuffText.transform.localPosition = canvasCorners[2] + Vector3.down * 100 + Vector3.down * 75 + Vector3.left * 150;
+                debuffText.transform.localPosition = canvasCorners[2] + Vector3.down * 100 + Vector3.down * 75 * i + Vector3.left * 150;
                 debuffText.transform.localScale = new Vector3(1f, 1f, 1f);
                 debuffText.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 300f);
                 debuffInd.SetActive(true);
                 debuffList.Add(debuff, debuffInd);
+                i++;
             }
             Globals.debuffChanged = false;
         }
