@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Baby : MonoBehaviour
 {
+    public GameObject returningPacifier;
     public float cryInterval = 15f;
     private float timeLeft;
     private enum BabyState { idle, crying }
@@ -47,14 +48,22 @@ public class Baby : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.gameObject.name.Equals("Player")) {
-            Globals.babyRage -= Globals.pacifiers;
-            if(Globals.babyRage < 0) {
-                Globals.babyRage = 0;
-            }
-            Globals.pacifiers = 0;
+        GameObject pacifierSprite = GameObject.Find("PacifierSprite");
+        if(col.gameObject.name.Equals("Player") && Globals.pacifiers > 0) {
+            StartCoroutine(collectPacifiers());
             
             // do something
+        }
+    }
+
+    IEnumerator collectPacifiers()
+    {
+        GameObject pacifierSprite = GameObject.Find("PacifierSprite");
+        while (Globals.pacifiers > 0)
+        {
+            Instantiate(returningPacifier, pacifierSprite.transform);
+            Globals.pacifiers--;
+            yield return new WaitForSeconds(0.25f);
         }
     }
 }

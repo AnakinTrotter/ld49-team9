@@ -142,4 +142,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 292a379160552824486374f31455e4c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  returningPacifier: {fileID: 673317663408986809, guid: 8c553ca70f80f1d489c09ba8399d9e98, type: 3}
   cryInterval: 10
