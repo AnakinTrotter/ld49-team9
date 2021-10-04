@@ -16,8 +16,6 @@ public static class DebuffRandomizer
             count++;
         }
         if(Globals.debuffs.Count == 0) {
-            if(Globals.level < 3)
-                n = 3;
             int idx = Random.Range(0, n);
             Globals.debuffs.Add((Globals.DebuffState) idx);
         }

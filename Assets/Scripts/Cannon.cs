@@ -32,7 +32,7 @@ public class Cannon : MonoBehaviour
     
     void Shoot()
     {
-        Debug.Log(bullet == null);
+        // Debug.Log(bullet == null);
         bullet.GetComponent<SpriteRenderer>().sprite = bulletSprite;
         Rigidbody2D bulletInstance = Instantiate(bullet, transform.position, transform.rotation).GetComponent<Rigidbody2D>();
         bulletInstance.velocity = new Vector2(dirX * Bullet.speed, 0);

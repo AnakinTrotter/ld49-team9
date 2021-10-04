@@ -52,59 +52,59 @@ public class UpdateCanvas : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Globals.debuffs.Contains(Globals.DebuffState.invert))
-            Debug.Log("Inverted");
-        if (Globals.debuffs.Contains(Globals.DebuffState.slow))
-            Debug.Log("slow");
-        if (Globals.debuffs.Contains(Globals.DebuffState.moon))
-            Debug.Log("moon");
-        if (Globals.debuffs.Contains(Globals.DebuffState.fast))
-            Debug.Log("fast");
+        // if (Globals.debuffs.Contains(Globals.DebuffState.invert))
+        //     Debug.Log("Inverted");
+        // if (Globals.debuffs.Contains(Globals.DebuffState.slow))
+        //     Debug.Log("slow");
+        // if (Globals.debuffs.Contains(Globals.DebuffState.moon))
+        //     Debug.Log("moon");
+        // if (Globals.debuffs.Contains(Globals.DebuffState.fast))
+        //     Debug.Log("fast");
         if (Globals.lives != heartList.Count && heartList.Count > 0)
         {
             Destroy(heartList[heartList.Count - 1]);
             heartList.RemoveAt(heartList.Count - 1);
         }
-        if (Globals.debuffs.Count != debuffList.Count || Globals.debuffChanged)
-        {
-            // reset debuffList
-            foreach (var debuff in debuffList)
-            {
-                Destroy(debuffList[debuff.Key]);
-            }
-            debuffList.Clear();
-            // Find new debuffs
-            List<Globals.DebuffState> newDebuffs = new List<Globals.DebuffState>();
-            foreach (var debuff in Globals.debuffs)
-            {
-                if (!debuffList.ContainsKey(debuff))
-                {
-                    newDebuffs.Add(debuff);
-                }
-            }
-            foreach (var debuff in newDebuffs)
-            {
-                // Add debuff text
-                GameObject debuffInd = new GameObject();
-                debuffInd.layer = LayerMask.NameToLayer("UI");
+        // if (Globals.debuffs.Count != debuffList.Count || Globals.debuffChanged)
+        // {
+        //     // reset debuffList
+        //     foreach (var debuff in debuffList)
+        //     {
+        //         Destroy(debuffList[debuff.Key]);
+        //     }
+        //     debuffList.Clear();
+        //     // Find new debuffs
+        //     List<Globals.DebuffState> newDebuffs = new List<Globals.DebuffState>();
+        //     foreach (var debuff in Globals.debuffs)
+        //     {
+        //         if (!debuffList.ContainsKey(debuff))
+        //         {
+        //             newDebuffs.Add(debuff);
+        //         }
+        //     }
+        //     foreach (var debuff in newDebuffs)
+        //     {
+        //         // Add debuff text
+        //         GameObject debuffInd = new GameObject();
+        //         debuffInd.layer = LayerMask.NameToLayer("UI");
 
-                Text debuffText = debuffInd.AddComponent<Text>();
+        //         Text debuffText = debuffInd.AddComponent<Text>();
 
-                debuffText.text = debuffDict[debuff];
-                debuffText.color = Color.red;
-                Font ArialFont = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
-                debuffText.font = ArialFont;
-                debuffText.fontSize = 25;
-                debuffText.material = ArialFont.material;
-                debuffText.alignment = TextAnchor.MiddleRight;
-                debuffInd.transform.SetParent(currCanvas.transform);
-                debuffText.transform.localPosition = canvasCorners[2] + Vector3.down * 100 + Vector3.down * 75 + Vector3.left * 150;
-                debuffText.transform.localScale = new Vector3(1f, 1f, 1f);
-                debuffText.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 300f);
-                debuffInd.SetActive(true);
-                debuffList.Add(debuff, debuffInd);
-            }
-            Globals.debuffChanged = false;
-        }
+        //         debuffText.text = debuffDict[debuff];
+        //         debuffText.color = Color.red;
+        //         Font ArialFont = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
+        //         debuffText.font = ArialFont;
+        //         debuffText.fontSize = 25;
+        //         debuffText.material = ArialFont.material;
+        //         debuffText.alignment = TextAnchor.MiddleRight;
+        //         debuffInd.transform.SetParent(currCanvas.transform);
+        //         debuffText.transform.localPosition = canvasCorners[2] + Vector3.down * 100 + Vector3.down * 75 + Vector3.left * 150;
+        //         debuffText.transform.localScale = new Vector3(1f, 1f, 1f);
+        //         debuffText.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 300f);
+        //         debuffInd.SetActive(true);
+        //         debuffList.Add(debuff, debuffInd);
+        //     }
+        //     Globals.debuffChanged = false;
+        // }
     }
 }

@@ -35,7 +35,7 @@ public class DashMechanics : MonoBehaviour
     {
         while (!PlayerController.onGround)
         {
-            Debug.Log(PlayerController.onGround);
+            // Debug.Log(PlayerController.onGround);
             yield return null;
         }
         recharge = true;

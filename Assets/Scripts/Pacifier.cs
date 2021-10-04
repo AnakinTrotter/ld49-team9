@@ -24,9 +24,9 @@ public class Pacifier : MonoBehaviour
             if (dir.magnitude < 8)
             {
                 Globals.pacifiers++;
-                Globals.currNumPacifiers--;
-                if (Globals.currNumPacifiers < Globals.maxNumPacifiers)
-                    Globals.shouldSpawn = true;
+                // Globals.currNumPacifiers--;
+                // if (Globals.currNumPacifiers < Globals.maxNumPacifiers)
+                //     Globals.shouldSpawn = true;
                 Destroy(this.gameObject);
             }
         }

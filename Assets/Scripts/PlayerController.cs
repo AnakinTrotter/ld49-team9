@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour
         // Globals.debuffs.Add(Globals.DebuffState.moon);
         // Globals.debuffs.Add(Globals.DebuffState.fast);
         // Globals.debuffs.Add(Globals.DebuffState.rewind);
+        Globals.debuffs.Add(Globals.DebuffState.blind);
         jumpBufferCounter = 100;
         coyoteTimer = 0f;
         wasGrounded = false;
@@ -84,6 +85,8 @@ public class PlayerController : MonoBehaviour
         backTimer = backCooldown;
         Globals.lives = 2;
         Globals.pacifiers = 0;
+        Globals.babyRage = 0;
+        Globals.debuffs.Clear();
     }
 
     // Update is called once per frame
@@ -95,14 +98,22 @@ public class PlayerController : MonoBehaviour
         rb.gravityScale = gravity;
 
         // account for debuffs
-        if(Globals.debuffs.Contains(Globals.DebuffState.invert))
+        if(Globals.debuffs.Contains(Globals.DebuffState.invert)) {
             dirX *= -1;
-        if(Globals.debuffs.Contains(Globals.DebuffState.slow))
+            // Debug.Log("invert");
+        }
+        if(Globals.debuffs.Contains(Globals.DebuffState.slow)) {
             speed /= 2;
-        if(Globals.debuffs.Contains(Globals.DebuffState.moon))
+            // Debug.Log("slow");
+        }
+        if(Globals.debuffs.Contains(Globals.DebuffState.moon)) {
             rb.gravityScale = gravity / 6;
-        if(Globals.debuffs.Contains(Globals.DebuffState.fast))
+            // Debug.Log("moon");
+        }
+        if(Globals.debuffs.Contains(Globals.DebuffState.fast)) {
             speed *= 4;
+            // Debug.Log("fast ");
+        }
 
         // time reverse timer logic
         if(backTimer > 0) {
@@ -154,17 +165,17 @@ public class PlayerController : MonoBehaviour
         // Improved horizontal movement
         if (!IsRolling)
         {
-            if (Mathf.Abs(rb.velocity.x) < moveSpeed && rb.velocity.x * dirX > 0)
+            if (Mathf.Abs(rb.velocity.x) < speed && rb.velocity.x * dirX > 0)
             {
-                rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
+                rb.velocity = new Vector2(dirX * speed, rb.velocity.y);
             }
             else if (rb.velocity.x * dirX < 0)
             {
-                rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
+                rb.velocity = new Vector2(dirX * speed, rb.velocity.y);
             }
             else if (rb.velocity.x == 0 && dirX != 0)
             {
-                rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
+                rb.velocity = new Vector2(dirX * speed, rb.velocity.y);
             }
             else if (rb.velocity.x != 0 && dirX == 0 && !IsDashing)
             {

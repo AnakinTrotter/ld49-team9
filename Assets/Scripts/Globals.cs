@@ -10,7 +10,7 @@ public static class Globals {
     public static int babyRage = 0;
     public static bool shouldSpawn = true;
     public static int currNumPacifiers = 0;
-    public static int maxNumPacifiers = 1;  // maximum number of pacifiers to exist in the level
+    public static int maxNumPacifiers = 5;  // maximum number of pacifiers to exist in the level
     public static bool debuffChanged = false;
     // keep track of player debuffs
     public enum DebuffState { slow, fast, invert, moon, rewind, blind } 

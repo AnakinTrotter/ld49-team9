@@ -5,11 +5,15 @@ using UnityEngine;
 public class Baby : MonoBehaviour
 {
     public GameObject returningPacifier;
-    public float cryInterval = 15f;
+    public float cryInterval = 25f;
     private float timeLeft;
     private enum BabyState { idle, crying }
     private Animator anim;
     // Start is called before the first frame update
+
+    private float debuffCooldown = 10f;
+    private float debuffTimer = 10f;
+
     void Start()
     {
         timeLeft = 10;
@@ -20,25 +24,32 @@ public class Baby : MonoBehaviour
     void Update()
     {
         if(Globals.babyRage > 10) {
-            Globals.gameOver();
+            Globals.gameOver(); 
+        }
+        if(Globals.babyRage < 0) {
+            Globals.babyRage = 0;
+        }
+        if(debuffTimer > 0 && Globals.debuffs.Count > 0) {
+            debuffTimer -= Time.deltaTime;
+        } else {
+            Globals.debuffs.Clear();
+            debuffTimer = debuffCooldown;
+            Globals.debuffChanged = true;
         }
         BabyState state = timeLeft > (cryInterval - 5) ? BabyState.crying : BabyState.idle;
         if(timeLeft > 0) {
             timeLeft -= Time.deltaTime;
         } else {
             Cry();
-            float newTime = cryInterval - Globals.babyRage / 2;
+            float newTime = cryInterval - Globals.babyRage;
+            // Debug.Log(newTime + " " + cryInterval + " " + Globals.babyRage);
             timeLeft = newTime >= 5 ? newTime : 5;
-            if(Globals.babyRage >= 9) {
-                timeLeft = 5;
-            }
         }
         anim.SetInteger("state", (int)state);
     }
 
     void Cry()
     {
-        Globals.debuffs.Clear();
         Globals.babyRage++;
         DebuffRandomizer.ApplyDebuffs();
         Globals.debuffChanged = true;
@@ -64,6 +75,7 @@ public class Baby : MonoBehaviour
         {
             Instantiate(returningPacifier, pacifierSprite.transform);
             Globals.pacifiers--;
+            Globals.currNumPacifiers--;
             yield return new WaitForSeconds(0.25f);
         }
     }
