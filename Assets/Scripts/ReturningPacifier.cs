@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ReturningPacifier : MonoBehaviour
 {
-    public static float collectSpeed = 8f;
+    public static float collectSpeed = 10f;
     public static float collectThreshold = 4.55f;
     private Rigidbody2D rb;
     private GameObject baby;

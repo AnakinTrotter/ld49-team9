@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public static class Globals {
@@ -21,7 +22,24 @@ public static class Globals {
         Debug.Log("DEAD");
     }
 
-    public static void RestartLevel(){
+    public static void RestartLevel()
+    {
+        GameObject endScreen = GameObject.Find("LevelComplete");
+        GameObject player = GameObject.Find("Player");
+        Color col = endScreen.GetComponent<Image>().color;
+        col.a = 1f;
+        endScreen.GetComponent<Image>().color = col;
+        player.GetComponent<PlayerController>().StartCoroutine(restartAfterPress());
+    }
+
+    public static IEnumerator restartAfterPress()
+    {
+        PlayerLife.Inv = true;
+        yield return new WaitForSeconds(2);
+        while (Input.anyKey)
+            yield return null;
+        while (!Input.anyKey)
+            yield return null;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
