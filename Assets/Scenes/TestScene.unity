@@ -265,10 +265,22 @@ PrefabInstance:
       propertyPath: bullet
       value: 
       objectReference: {fileID: 8154535946931623435, guid: e560e7cef71d4d8469957a70c042d92e, type: 3}
+    - target: {fileID: 8098071953380972553, guid: da8d002b044d2b84bbcb71300932c60d, type: 3}
+      propertyPath: rotateSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8098071953380972553, guid: da8d002b044d2b84bbcb71300932c60d, type: 3}
+      propertyPath: bulletSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8f0babd127bdf714ea2b1d4e8609fba3, type: 3}
     - target: {fileID: 8326756075411246747, guid: da8d002b044d2b84bbcb71300932c60d, type: 3}
       propertyPath: m_Name
       value: Cannon
       objectReference: {fileID: 0}
+    - target: {fileID: 8326756075411246821, guid: da8d002b044d2b84bbcb71300932c60d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 120aeb356427aec409c3edb45f2f7f65, type: 3}
     - target: {fileID: 8326756075411246822, guid: da8d002b044d2b84bbcb71300932c60d, type: 3}
       propertyPath: m_RootOrder
       value: 3
