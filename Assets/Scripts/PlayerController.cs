@@ -243,9 +243,9 @@ public class PlayerController : MonoBehaviour
                 if (jumpsBuffered > 1)
                 {
                     DoubleJump();
-                    jumpsBuffered = 0;
                     hasDoubleJump = false;
                 }
+                jumpsBuffered = 0;
             }
         }
 
