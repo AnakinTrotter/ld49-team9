@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ScanArrow : MonoBehaviour
 {
+    [SerializeField] private float distMult = 1;
     private float delay = 5f;
     public Transform pacifier, parent;
     private float alpha = 1f;
@@ -28,7 +29,7 @@ public class ScanArrow : MonoBehaviour
             setAlpha(alpha - fadeSpeed);
         }
         Vector3 dir = pacifier.position - parent.position;
-        this.transform.position = parent.position + dir / dir.magnitude * 2 - new Vector3(0,0,1);
+        this.transform.position = parent.position + dir / dir.magnitude * distMult - new Vector3(0,0,1);
         this.transform.rotation = Quaternion.Euler(0,0, Mathf.Rad2Deg * Mathf.Atan(dir.y / dir.x));
     }
 

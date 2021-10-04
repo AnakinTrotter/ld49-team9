@@ -15,4 +15,9 @@ public class SeeCredits : MonoBehaviour
     {
         
     }
+
+    private void OnMouseDown()
+    {
+        
+    }
 }

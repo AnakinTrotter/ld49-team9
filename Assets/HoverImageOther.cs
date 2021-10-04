@@ -3,26 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HoverImage : MonoBehaviour
+public class HoverImageOther : MonoBehaviour
 {
     public Sprite normal;
     public Sprite hovered;
+    public GameObject other;
     private bool hover = false;
 
     private void Update()
     {
-        if(hover)
-            this.GetComponent<Image>().sprite = hovered;
+        if (hover)
+            other.GetComponent<Image>().sprite = hovered;
     }
 
     private void OnMouseEnter()
     {
-        this.GetComponent<Image>().sprite = hovered;
+        other.GetComponent<Image>().sprite = hovered;
         hover = true;
     }
     private void OnMouseExit()
     {
-        this.GetComponent<Image>().sprite = normal;
+        other.GetComponent<Image>().sprite = normal;
         hover = false;
     }
 }
