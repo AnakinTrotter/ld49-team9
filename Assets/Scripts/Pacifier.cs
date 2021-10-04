@@ -21,7 +21,6 @@ public class Pacifier : MonoBehaviour
         {
             Vector3 dir = depositPos.transform.position - this.transform.position;
             rb.velocity = dir.normalized * collectSpeed;
-            Debug.Log(dir.magnitude);
             if (dir.magnitude < 8)
             {
                 Globals.pacifiers++;

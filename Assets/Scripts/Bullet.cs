@@ -22,7 +22,6 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Trigger");
         string tag = collision.gameObject.tag;
         if (tag == "Cannon")
             Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), collision);

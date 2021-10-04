@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class RollMechanics : MonoBehaviour
 {
-
     void Update() {
-        // roll cooldown
-        if(PlayerController.rollTimer > 0 && PlayerController.onGround) {
-            PlayerController.rollTimer -= Time.deltaTime;
-        }
     }
     
     void RollStart()
@@ -25,6 +20,5 @@ public class RollMechanics : MonoBehaviour
         PlayerController.currentRollState = PlayerController.rollState.rollEnd;
         //Physics2D.IgnoreLayerCollision(7, 10, false);
         HitDetection.hideHitbox = false;
-        
     }
 }

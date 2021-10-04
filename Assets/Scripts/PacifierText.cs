@@ -17,7 +17,6 @@ public class PacifierText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(Globals.pacifiers < 10 ? -40 : -25);
         backdrop.transform.localScale = new Vector3(Globals.pacifiers < 10 ? 40 : 80, 50, 1);
         backdrop.transform.position = new Vector3(Globals.pacifiers < 10 ? -40 : -25, 2, 0);
         statusText.text = Globals.pacifiers + "";
