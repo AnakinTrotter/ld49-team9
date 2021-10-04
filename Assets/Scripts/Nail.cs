@@ -21,7 +21,6 @@ public class Nail : MonoBehaviour
         string tag = collision.gameObject.tag;
         if (tag == "Player") {
             PlayerLife.TakeDamage();
-            Destroy(gameObject);
         }
             
     }

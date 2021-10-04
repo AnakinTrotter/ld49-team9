@@ -29,9 +29,9 @@ public class Bullet : MonoBehaviour
             Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), collision);
         else
         {
-            if (tag == "Player")
-                PlayerLife.TakeDamage();
-            Destroy(gameObject);
+            if (tag == "Player") 
+                if(PlayerLife.TakeDamage())
+                    Destroy(gameObject);
         }
     }
 

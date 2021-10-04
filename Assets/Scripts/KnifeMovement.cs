@@ -14,7 +14,7 @@ public class KnifeMovement : MonoBehaviour
     [SerializeField] private float detectionRange = 10f;
     private bool IsAttacking = false;
     private LayerMask targLayer;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,14 +27,9 @@ public class KnifeMovement : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        string tag = collision.gameObject.transform.parent.tag;
-        if(tag == "Player") {
-            Debug.Log("Contact - hostile shooter!");
-            PlayerLife.TakeDamage();
+        Debug.Log("Contact - hostile shooter!");
+        if (PlayerLife.TakeDamage())
             Destroy(gameObject);
-        } else {
-            Destroy(gameObject);
-        }
     }
 
     // Update is called once per frame
@@ -46,7 +41,7 @@ public class KnifeMovement : MonoBehaviour
             Debug.Log("Enemy Spotted!");
             Attack();
             // anim.SetTrigger("attack");
-        } 
+        }
         if (Mathf.Abs(knife.position.x) >= 100)
         {
             Destroy(gameObject);
