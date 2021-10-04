@@ -97,7 +97,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firepoint: {fileID: 8326756076468902416}
-  bullet: {fileID: 0}
+  bullet: {fileID: 8154535946931623435, guid: e560e7cef71d4d8469957a70c042d92e, type: 3}
+  bulletSprite: {fileID: 0}
+  facingLeft: 0
   shotInterval: 3
 --- !u!1 &8326756076468902423
 GameObject:
