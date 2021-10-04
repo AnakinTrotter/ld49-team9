@@ -7,6 +7,8 @@ public class Cannon : MonoBehaviour
 {
     [SerializeField] private Transform firepoint;
     [SerializeField] private GameObject bullet;
+    [SerializeField] private float bulletSpeed = 10f;
+    [SerializeField] private float rotateSpeed = 0f;
     [SerializeField] private Sprite bulletSprite;
     [SerializeField] private bool facingLeft;
     [SerializeField] private float shotInterval = 3f;
@@ -32,9 +34,9 @@ public class Cannon : MonoBehaviour
     
     void Shoot()
     {
-        Debug.Log(bullet == null);
         bullet.GetComponent<SpriteRenderer>().sprite = bulletSprite;
+        bullet.GetComponent<Bullet>().rotateSpeed = rotateSpeed;
         Rigidbody2D bulletInstance = Instantiate(bullet, transform.position, transform.rotation).GetComponent<Rigidbody2D>();
-        bulletInstance.velocity = new Vector2(dirX * Bullet.speed, 0);
+        bulletInstance.velocity = new Vector2(dirX * bulletSpeed * Bullet.bulletSpeedMult, 0);
     }
 }

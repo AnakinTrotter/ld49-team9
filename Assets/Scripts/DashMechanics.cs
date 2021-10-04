@@ -16,6 +16,7 @@ public class DashMechanics : MonoBehaviour
     {
         PlayerController.IsDashing = true;
         HitDetection.hideHitbox = true;
+        PlayerController.rollTimer = PlayerController.rollCooldown;
         //Physics2D.IgnoreLayerCollision(7, 10);
         recharge = false;
     }
@@ -26,8 +27,6 @@ public class DashMechanics : MonoBehaviour
         HitDetection.hideHitbox = false;
         //Physics2D.IgnoreLayerCollision(7, 10, false);
         PlayerController.canDash = true;
-        PlayerController.rollTimer = PlayerController.rollCooldown;
-        Debug.Log(PlayerController.onGround);
         StartCoroutine(WaitForGround());
     }
 

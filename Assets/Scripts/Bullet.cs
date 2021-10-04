@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public static float speed = 10f;
+    public static float bulletSpeedMult = 1f;
+    public float rotateSpeed = 0f;
     Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,7 @@ public class Bullet : MonoBehaviour
         if(Mathf.Abs(transform.position.x) > 100) {
             Destroy(gameObject);
         }
+        this.transform.Rotate(new Vector3(0, 0, rotateSpeed));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
