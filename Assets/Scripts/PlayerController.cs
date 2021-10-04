@@ -132,7 +132,7 @@ public class PlayerController : MonoBehaviour
         onGround = IsGrounded();
 
         // Start roll logic
-        if (Input.GetButtonDown("Fire3") && IsGrounded() && rollTimer <= 0)
+        if ((Input.GetButtonDown("Fire3") || Input.GetKeyDown("r")) && IsGrounded() && rollTimer <= 0)
         {
             if (sprite.flipX) {
                 rollDir = -1;
@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Start: Aerial dash logic
-        if (Input.GetButtonDown("Fire3") && !onGround && rollTimer <= 0 && canDash)
+        if ((Input.GetButtonDown("Fire3") || Input.GetKeyDown("r")) && !onGround && rollTimer <= 0 && canDash)
         {
             anim.SetTrigger("dash");
             canDash = false;
@@ -151,7 +151,12 @@ public class PlayerController : MonoBehaviour
         }
         if (IsDashing)
         {
-            rb.velocity = new Vector2(dashDir.x * dashSpeed, dashDir.y * dashSpeed);
+            if(dashDir == Vector2.zero) {
+                int flipRoll = sprite.flipX ? -1 : 1;
+                rb.velocity = new Vector2(flipRoll * dashSpeed, dashDir.y * dashSpeed);
+            } else {
+                rb.velocity = new Vector2(dashDir.x * dashSpeed, dashDir.y * dashSpeed);
+            }
         }
         // End: Aerial dash logic
 
