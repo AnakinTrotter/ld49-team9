@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1531291313}
   - component: {fileID: 1531291314}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 619801501260624258}
   - component: {fileID: 619801501260624259}
   - component: {fileID: 1363160783}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,10 +158,13 @@ MonoBehaviour:
     m_Bits: 64
   moveSpeed: 7
   jumpForce: 14
-  rollDistance: 20
+  rollSpeed: 20
+  dashSpeed: 20
   jumpSoundEffect: {fileID: 0}
   coyoteMaxTime: 0.1
   scanner: {fileID: 3499748184585197068, guid: 9f595b554f036764a86dfeaf4693a55c, type: 3}
+  scanTimer: 0
+  scanCooldown: 10
 --- !u!95 &619801501260624258
 Animator:
   serializedVersion: 3

@@ -661,15 +661,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 701618404542828019, guid: 7119bb98594b29847ac6497eca9408a5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 502.03006
+      value: 502.02997
       objectReference: {fileID: 0}
     - target: {fileID: 701618404804965504, guid: 7119bb98594b29847ac6497eca9408a5, type: 3}
       propertyPath: m_UiScaleMode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 701618404804965504, guid: 7119bb98594b29847ac6497eca9408a5, type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 701618404804965504, guid: 7119bb98594b29847ac6497eca9408a5, type: 3}
       propertyPath: m_MatchWidthOrHeight
-      value: 0.5
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 701618404804965504, guid: 7119bb98594b29847ac6497eca9408a5, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 701618404804965504, guid: 7119bb98594b29847ac6497eca9408a5, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 701618404804965506, guid: 7119bb98594b29847ac6497eca9408a5, type: 3}
       propertyPath: m_Name
@@ -2503,6 +2515,10 @@ PrefabInstance:
     - target: {fileID: 3338681872782710849, guid: 97da10ad5a96b8e4f8298579ab5be98d, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3338681872782710849, guid: 97da10ad5a96b8e4f8298579ab5be98d, type: 3}
+      propertyPath: m_TagString
+      value: Pushable
       objectReference: {fileID: 0}
     - target: {fileID: 3338681872782710852, guid: 97da10ad5a96b8e4f8298579ab5be98d, type: 3}
       propertyPath: target

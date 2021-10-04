@@ -17,12 +17,16 @@ public class RollMechanics : MonoBehaviour
         PlayerController.currentRollState = PlayerController.rollState.rollStart;
         HitDetection.hideHitbox = true;
         PlayerController.rollTimer = PlayerController.rollCooldown;
+        Physics2D.IgnoreLayerCollision(7, 10);
+        Debug.Log("Start");
     }
 
     void RollEnd()
     {
         PlayerController.currentRollState = PlayerController.rollState.rollEnd;
+        Physics2D.IgnoreLayerCollision(7, 10, false);
         HitDetection.hideHitbox = false;
+        Debug.Log("stop");
         
     }
 }
