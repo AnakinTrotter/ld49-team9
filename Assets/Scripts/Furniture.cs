@@ -7,6 +7,9 @@ public class Furniture : MonoBehaviour
     [SerializeField] private GameObject target;
     [SerializeField] private float speed = 100f;
     private Rigidbody2D rb;
+
+    private float seekTimer = 30f;
+    private float seekCooldown = 30f;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +19,12 @@ public class Furniture : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(seekTimer > 0) {
+            seekTimer -= Time.deltaTime;
+        } else {
+            SeekPlayer();
+            seekTimer = seekCooldown;
+        }
     }
 
     void SeekPlayer() {

@@ -107,11 +107,11 @@ public class PlayerController : MonoBehaviour
             // Debug.Log("slow");
         }
         if(Globals.debuffs.Contains(Globals.DebuffState.moon)) {
-            rb.gravityScale = gravity / 6;
+            rb.gravityScale = gravity / 4;
             // Debug.Log("moon");
         }
         if(Globals.debuffs.Contains(Globals.DebuffState.fast)) {
-            speed *= 4;
+            speed *= 2;
             // Debug.Log("fast ");
         }
 
