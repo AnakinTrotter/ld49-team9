@@ -10,7 +10,7 @@ public class UpdateCanvas : MonoBehaviour
     // Lives Sprite
     [SerializeField] public Sprite heartTexture;
     private List<GameObject> heartList;
-    [SerializeField] private float heart_scale = 0.65f;
+    [SerializeField] private float heart_scale = 0.5f;
     private Vector3[] canvasCorners = new Vector3[4];
     // Debuffs Sprite
     [SerializeField] private Dictionary<Globals.DebuffState, GameObject> debuffList = new Dictionary<Globals.DebuffState, GameObject>();
