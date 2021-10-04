@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
         // Globals.debuffs.Add(Globals.DebuffState.moon);
         // Globals.debuffs.Add(Globals.DebuffState.fast);
         // Globals.debuffs.Add(Globals.DebuffState.rewind);
-        Globals.debuffs.Add(Globals.DebuffState.blind);
+        // Globals.debuffs.Add(Globals.DebuffState.blind);
         jumpBufferCounter = 100;
         coyoteTimer = 0f;
         wasGrounded = false;
@@ -297,6 +297,7 @@ public class PlayerController : MonoBehaviour
         }
 
         anim.SetInteger("state", (int)state);
+        transform.position = new Vector3(transform.position.x, transform.position.y, -1);
     }
 
     private void DoubleJump()

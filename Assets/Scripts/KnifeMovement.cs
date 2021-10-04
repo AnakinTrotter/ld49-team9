@@ -9,9 +9,9 @@ public class KnifeMovement : MonoBehaviour
     private Animator anim;
     [SerializeField] private bool facingLeft;
     private float dirX = 1f;
-    [SerializeField] private float velocity = 12f;
+    [SerializeField] private float velocity = 3f;
     private Vector2 dir;
-    [SerializeField] private float detectionRange = 20f;
+    [SerializeField] private float detectionRange = 10f;
     private bool IsAttacking = false;
     private LayerMask targLayer;
     
@@ -20,7 +20,7 @@ public class KnifeMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         knife = GetComponent<Transform>();
-        anim = GetComponent<Animator>();
+        // anim = GetComponent<Animator>();
         dirX = facingLeft ? -1 : 1;
         dir = new Vector2(dirX, 0);
         targLayer = LayerMask.GetMask("Player");
@@ -39,7 +39,8 @@ public class KnifeMovement : MonoBehaviour
         if (!IsAttacking && Physics2D.Raycast(pos, dir, detectionRange, targLayer))
         {
             Debug.Log("Enemy Spotted!");
-            anim.SetTrigger("attack");
+            Attack();
+            // anim.SetTrigger("attack");
         } 
         if (Mathf.Abs(knife.position.x) >= 100)
         {
