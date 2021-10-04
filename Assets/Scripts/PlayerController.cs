@@ -82,6 +82,7 @@ public class PlayerController : MonoBehaviour
         hasDoubleJump = true;
         jumpsBuffered = 0;
         rollTimer = rollCooldown;
+        scanTimer = scanCooldown;
         gravity = rb.gravityScale;
         prevPos = transform.position;
         backTimer = backCooldown;
