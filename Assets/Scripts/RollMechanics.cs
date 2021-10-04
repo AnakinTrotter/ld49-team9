@@ -7,7 +7,7 @@ public class RollMechanics : MonoBehaviour
 
     void Update() {
         // roll cooldown
-        if(PlayerController.rollTimer > 0) {
+        if(PlayerController.rollTimer > 0 && PlayerController.onGround) {
             PlayerController.rollTimer -= Time.deltaTime;
         }
     }
