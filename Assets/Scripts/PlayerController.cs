@@ -83,15 +83,15 @@ public class PlayerController : MonoBehaviour
         gravity = rb.gravityScale;
         prevPos = transform.position;
         backTimer = backCooldown;
-        Globals.lives = 2;
-        Globals.pacifiers = 0;
-        Globals.babyRage = 0;
         Globals.debuffs.Clear();
     }
 
     // Update is called once per frame
     private void Update()
     {
+        if(transform.position.y < -20) {
+            PlayerLife.Die();
+        }
         dirX = Input.GetAxisRaw("Horizontal");
         speed = moveSpeed;
         scanTimer = Mathf.Min(scanTimer + Time.deltaTime, scanCooldown);
@@ -297,7 +297,7 @@ public class PlayerController : MonoBehaviour
         }
 
         anim.SetInteger("state", (int)state);
-        transform.position = new Vector3(transform.position.x, transform.position.y, -1);
+        transform.position = new Vector3(transform.position.x, transform.position.y, -5);
     }
 
     private void DoubleJump()
