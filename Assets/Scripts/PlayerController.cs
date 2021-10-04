@@ -42,14 +42,14 @@ public class PlayerController : MonoBehaviour
     private bool wasGrounded;           // for coyote time
     private bool timerStart;
     private bool hasDoubleJump;
+    public static bool onGround;
+    public static bool canDash = true;
 
     public GameObject scanner;
     public float scanTimer, scanCooldown = 10f;
 
-    public static float rollCooldown = 1f;
+    public static float rollCooldown = 0.6f;
     public static float rollTimer;
-    public static float dashCooldown = 1f;
-    public static float dashTimer;
 
 
     private float gravity;
@@ -116,6 +116,8 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        onGround = IsGrounded();
+
         // Start roll logic
         if (Input.GetButtonDown("Fire3") && IsGrounded() && rollTimer <= 0)
         {
@@ -128,9 +130,10 @@ public class PlayerController : MonoBehaviour
         }
 
         // Start: Aerial dash logic
-        if (Input.GetButtonDown("Fire3") && !IsGrounded() && rollTimer <= 0)
+        if (Input.GetButtonDown("Fire3") && !onGround && rollTimer <= 0 && canDash)
         {
             anim.SetTrigger("dash");
+            canDash = false;
             dashDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         }
         if (IsDashing)
@@ -185,7 +188,7 @@ public class PlayerController : MonoBehaviour
 
 
         // START Coyote Time logic
-        if (IsGrounded() && rb.velocity.y == 0)  // to make sure player is not in process of jumping
+        if (onGround && rb.velocity.y == 0)  // to make sure player is not in process of jumping
         {
             wasGrounded = true;
         }
@@ -216,7 +219,7 @@ public class PlayerController : MonoBehaviour
         // END Coyote Time logic
 
         // Jump logic
-        if (IsGrounded())
+        if (onGround)
         {
             hasDoubleJump = true;  // reset for double jump
         }
@@ -225,7 +228,7 @@ public class PlayerController : MonoBehaviour
         {
             jumpBufferCounter = 0;
             jumpsBuffered++;
-            if (!IsGrounded() && hasDoubleJump) 
+            if (!onGround && hasDoubleJump) 
             {
                 hasDoubleJump = false;
                 jumpsBuffered = 0;
@@ -236,7 +239,7 @@ public class PlayerController : MonoBehaviour
         if (jumpBufferCounter < bufferMax)
         {
             jumpBufferCounter += 1;
-            if (IsGrounded())
+            if (onGround)
             { 
                 // jumpSoundEffect.Play();
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);

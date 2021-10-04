@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1531291313}
   - component: {fileID: 1531291314}
-  m_Layer: 8
+  - component: {fileID: 619801500242737995}
+  m_Layer: 7
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,6 +58,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.3085753}
   m_EdgeRadius: 0
+--- !u!114 &619801500242737995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531291312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f81b31f58007ef740a18481079b3c291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &619801501260624268
 GameObject:
   m_ObjectHideFlags: 0
@@ -72,9 +85,10 @@ GameObject:
   - component: {fileID: 619801501260624258}
   - component: {fileID: 619801501260624259}
   - component: {fileID: 1363160783}
+  - component: {fileID: 869386594}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158,8 +172,8 @@ MonoBehaviour:
     m_Bits: 64
   moveSpeed: 7
   jumpForce: 14
-  rollSpeed: 20
-  dashSpeed: 20
+  rollSpeed: 10
+  dashSpeed: 12
   jumpSoundEffect: {fileID: 0}
   coyoteMaxTime: 0.1
   scanner: {fileID: 3499748184585197068, guid: 9f595b554f036764a86dfeaf4693a55c, type: 3}
@@ -229,7 +243,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -245,5 +259,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91cd33392f73f894bbc0d39128ce39ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &869386594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619801501260624268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8878a2a9f80424fa91d0e9980ad366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
