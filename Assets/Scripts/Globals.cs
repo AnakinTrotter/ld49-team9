@@ -17,6 +17,7 @@ public static class Globals {
     public static HashSet<DebuffState> debuffs = new HashSet<DebuffState>();
 
     public static void gameOver() {
+        SceneManager.LoadScene("GameOverScreen");
         Debug.Log("DEAD");
     }
 
