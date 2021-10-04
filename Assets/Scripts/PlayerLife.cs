@@ -15,6 +15,7 @@ public static class PlayerLife
         {
             Globals.lives -= x;
             Invincible();
+            PlayerController.DamageAnim();
         }
         //Debug.Log("HP: " + Globals.lives);
         if(Globals.lives <= 0){

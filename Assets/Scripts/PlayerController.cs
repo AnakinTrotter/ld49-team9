@@ -315,4 +315,23 @@ public class PlayerController : MonoBehaviour
         return Physics2D.BoxCast(coll.bounds.center, new Vector2(coll.bounds.size.x * 0.75f, 
             coll.bounds.size.y), 0f, Vector2.down, .1f, jumpableGround);
     }
+
+    public static void DamageAnim()
+    {
+        GameObject player = GameObject.Find("Player");
+        SpriteRenderer sprite = player.GetComponent<SpriteRenderer>();
+        player.GetComponent<PlayerController>().StartCoroutine(PlayerController.playerFade(sprite));
+    }
+
+    public static IEnumerator playerFade(SpriteRenderer sprite)
+    {
+        float alpha = 0.25f;
+        while (alpha < 0.75f)
+        {
+            sprite.color = new Color(1, alpha, alpha, 0.25f + alpha);
+            alpha += 0.5f / 2f * Time.deltaTime;
+            yield return null;
+        }
+        sprite.color = new Color(1f, 1f, 1f, 1f);
+    }
 }
