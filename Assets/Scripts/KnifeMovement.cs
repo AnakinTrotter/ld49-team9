@@ -27,9 +27,13 @@ public class KnifeMovement : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Contact - hostile shooter!");
-        if (PlayerLife.TakeDamage())
+        // Debug.Log("Contact - hostile shooter!");
+        if(collision.transform.parent.gameObject.tag == "Player") {
+            if (PlayerLife.TakeDamage())
+                Destroy(gameObject);
+        } else {
             Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame

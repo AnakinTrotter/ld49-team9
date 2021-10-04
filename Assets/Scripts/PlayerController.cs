@@ -67,12 +67,14 @@ public class PlayerController : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         player = GetComponent<Transform>();
+        Globals.debuffs.Clear();
+
         // Globals.debuffs.Add(Globals.DebuffState.invert);
         // Globals.debuffs.Add(Globals.DebuffState.slow);
         // Globals.debuffs.Add(Globals.DebuffState.moon);
         // Globals.debuffs.Add(Globals.DebuffState.fast);
         // Globals.debuffs.Add(Globals.DebuffState.rewind);
-        // Globals.debuffs.Add(Globals.DebuffState.blind);
+
         jumpBufferCounter = 100;
         coyoteTimer = 0f;
         wasGrounded = false;
@@ -83,12 +85,14 @@ public class PlayerController : MonoBehaviour
         gravity = rb.gravityScale;
         prevPos = transform.position;
         backTimer = backCooldown;
-        Globals.debuffs.Clear();
     }
 
     // Update is called once per frame
     private void Update()
     {
+        if(Input.GetKeyDown("escape")) {  
+            Globals.RestartLevel();
+        }
         if(transform.position.y < -20) {
             PlayerLife.Die();
         }

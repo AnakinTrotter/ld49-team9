@@ -20,8 +20,8 @@ public class UpdateCanvas : MonoBehaviour
         {Globals.DebuffState.fast, "Speedy!" },
         {Globals.DebuffState.invert, "Inverted Controls!" },
         {Globals.DebuffState.moon, "Moon!" },
-        {Globals.DebuffState.rewind, "Rewinded!" },
-        {Globals.DebuffState.blind, "Blinded!" }
+        {Globals.DebuffState.rewind, "Rewinded!" }
+        // ,{Globals.DebuffState.blind, "Blinded!" }
         };
     // Start is called before the first frame update
     void Start()

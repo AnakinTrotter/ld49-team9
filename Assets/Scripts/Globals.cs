@@ -13,7 +13,7 @@ public static class Globals {
     public static int maxNumPacifiers = 5;  // maximum number of pacifiers to exist in the level
     public static bool debuffChanged = false;
     // keep track of player debuffs
-    public enum DebuffState { slow, fast, invert, moon, rewind, blind } 
+    public enum DebuffState { slow, fast, invert, moon, rewind } 
     public static HashSet<DebuffState> debuffs = new HashSet<DebuffState>();
 
     public static void gameOver() {

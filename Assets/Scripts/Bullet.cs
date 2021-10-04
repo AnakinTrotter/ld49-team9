@@ -25,7 +25,10 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         string tag = collision.gameObject.tag;
-        if (tag == "Cannon")
+        if(tag == "Walls") {
+            Destroy(gameObject);
+        }
+        else if (tag == "Cannon")
             Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), collision);
         else
         {
