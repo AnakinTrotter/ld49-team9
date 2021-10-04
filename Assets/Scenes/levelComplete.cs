@@ -16,7 +16,7 @@ public class levelComplete : MonoBehaviour
     {
         if (Input.anyKey || Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
         {
-            SceneManager.LoadScene("rooms");
+            SceneManager.LoadScene("NewLevel");
         }
     }
 }
