@@ -85,6 +85,7 @@ public class PlayerController : MonoBehaviour
         gravity = rb.gravityScale;
         prevPos = transform.position;
         backTimer = backCooldown;
+        GameObject.FindGameObjectWithTag("Music").GetComponent<MusicClass>().PlayMusic();
     }
 
     // Update is called once per frame
