@@ -32,16 +32,17 @@ public class UpdateCanvas : MonoBehaviour
         for (int i = 0; i < Globals.lives; i++)
         {
             GameObject newObj = new GameObject();
+            newObj.layer = LayerMask.NameToLayer("UI");
             Image heartImage = newObj.AddComponent<Image>();
             RectTransform heartRect = newObj.GetComponent<RectTransform>();
             heartImage.sprite = heartTexture;
             newObj.GetComponent<RectTransform>().SetParent(currCanvas.transform);
             canvasRect.GetLocalCorners(canvasCorners);    // get 4 corners of canvas
-            heartImage.rectTransform.localScale = new Vector2(heart_scale, heart_scale);
+            
             heartImage.transform.localPosition = canvasCorners[1] + (Vector3.up*0.75f*heartRect.rect.y) + 
                 (Vector3.left*heartRect.rect.x*0.75f + Vector3.left*i*heartRect.rect.x*1.5f);
+            newObj.transform.localScale = new Vector3(heart_scale, heart_scale, 1f);
             newObj.SetActive(true);
-            Debug.Log(heartRect.localScale);
             heartList.Add(newObj);
         }
 
@@ -51,6 +52,7 @@ public class UpdateCanvas : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(Globals.debuffs.Count);
         if (Globals.lives != heartList.Count && heartList.Count > 0)
         {
             Destroy(heartList[heartList.Count - 1]);
@@ -71,14 +73,21 @@ public class UpdateCanvas : MonoBehaviour
             {
                 // Add debuff text
                 GameObject debuffInd = new GameObject("DebuffText");
+                debuffInd.layer = LayerMask.NameToLayer("UI");
+                
                 Text debuffText = debuffInd.AddComponent<Text>();
+                //RectTransform textRect = debuffInd.GetComponent<RectTransform>();
+
                 debuffText.text = debuffDict[debuff];
                 debuffText.color = Color.red;
                 Font ArialFont = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
                 debuffText.font = ArialFont;
+                debuffText.fontSize = 25;
                 debuffText.material = ArialFont.material;
+                debuffText.alignment = TextAnchor.MiddleRight;
                 debuffInd.transform.SetParent(currCanvas.transform);
-                debuffText.transform.localPosition = canvasCorners[2];
+                debuffText.transform.localPosition = canvasCorners[2] + Vector3.down*100+Vector3.down*75 + Vector3.left*100;
+                debuffText.transform.localScale = new Vector3(1f, 1f, 1f);
                 debuffInd.SetActive(true);
                 debuffList.Add(debuff, debuffInd);
             }
