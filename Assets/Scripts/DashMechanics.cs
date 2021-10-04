@@ -18,12 +18,14 @@ public class DashMechanics : MonoBehaviour
     {
         PlayerController.IsDashing = true;
         HitDetection.hideHitbox = true;
+        Physics2D.IgnoreLayerCollision(7, 10);
     }
 
     void DashEnd()
     {
         PlayerController.IsDashing = false;
         HitDetection.hideHitbox = false;
+        Physics2D.IgnoreLayerCollision(7, 10, false);
         PlayerController.rollTimer = PlayerController.rollCooldown;
     }
 }
